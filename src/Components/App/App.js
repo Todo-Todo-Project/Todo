@@ -1,6 +1,6 @@
 import './App.css';
 import { Col, Container, Navbar, Row, ThemeProvider } from 'react-bootstrap';
-import ToDoList from '../TodoList';
+import ToDoList from '../TodoItem';
 
 function App() {
   const todos = [{id: 1, name: 'Learn English', isCompleted: true}, {id: 2, name: 'Learn Spanish', isCompleted: false}];
