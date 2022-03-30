@@ -1,5 +1,5 @@
 import './TodoList.css';
-import TodoItem from '../TodoList/TodoList';
+import TodoItem from '../TodoItems';
 import { useEffect, useState } from 'react';
 
 function TodoList() {
