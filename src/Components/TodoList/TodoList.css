@@ -1,8 +1,8 @@
-.todo-list > li{
+.todo-list >li{
     list-style: none;
 }
 
-.todo-list > li > div {
+.todo-list >li >div {
     display: inline-block;
     margin-left: 10px;
 }
