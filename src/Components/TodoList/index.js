@@ -17,6 +17,7 @@ function TodoList() {
   }, []);
 
   function loadAllTodos() {
+    console.log("loadAllTodos");
     const authString = localStorage.getItem('authInfo');
     const accessToken = authString && JSON.parse(authString).accessToken;
     const headers = { 'Content-Type': 'application/json' };
@@ -25,6 +26,7 @@ function TodoList() {
     }
     fetch(`${process.env.REACT_APP_API_URL}/todos`, { headers })
       .then(res => {
+        console.log(res);
         if (res.status === 401) {
           setError('Unauthorized');
           navigate('/login');
@@ -32,9 +34,9 @@ function TodoList() {
         }
         return res.json()})
       .then(
-        (result) => {
+        (res) => {
           setIsLoaded(true);
-          setTodos(result);
+          setTodos(res);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -45,6 +47,7 @@ function TodoList() {
         },
       );
   }
+
 
   function handleToggleTodoItem(todo) {
     const accessToken = localStorage.getItem('authInfo') && localStorage.getItem('authInfo').accessToken;
@@ -59,7 +62,7 @@ function TodoList() {
     })
       .then(res => res.json())
       .then(
-        (result) => {
+        (res) => {
           setIsLoaded(true);
           loadAllTodos();
         },
@@ -83,6 +86,7 @@ function TodoList() {
                                    id={todo._id} onToggle={() => handleToggleTodoItem(todo)} />)}
     </ul>;
   }
+
 }
 
 export default TodoList;
