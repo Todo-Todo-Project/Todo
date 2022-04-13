@@ -1,7 +1,8 @@
 import './App.css';
 import { Col, Container, Navbar, Row, ThemeProvider } from 'react-bootstrap';
-// import TodoItem from '../TodoItem';
+
 import TodoList from '../TodoList';
+
 
 function App() {
   const todos = [{id: 1, name: 'Learn English', isCompleted: true}, {id: 2, name: 'Learn Spanish', isCompleted: false}];
@@ -17,7 +18,9 @@ function App() {
       <Container>
         <Row>
           <Col md={4}>Left menu</Col>
+
           <Col md={8}><TodoList todos={todos} /></Col>
+
         </Row>
       </Container>
     </ThemeProvider>
