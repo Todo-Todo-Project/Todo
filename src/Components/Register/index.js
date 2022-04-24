@@ -27,6 +27,7 @@ function Register() {
                       ) {
                         errors.email = 'Invalid email address';
                       }
+                      return errors;
                     }}
                     onSubmit={async (values, { setSubmitting }) => {
                       await register(values.email, values.password);
@@ -44,20 +45,19 @@ function Register() {
                         /* and other goodies */
                       }) => (
                       <form onSubmit={handleSubmit}>
-                        <div class="login_field" >
-                          <input class='input'
+                        <div className="login_field" >
+                          <input className='input'
                             type="email"
                             name="email"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.email}
                             placeholder="Email"
-                            title={errors.email}
                           />
                           {errors.email && touched.email && errors.email}
                         </div>
-                        <div class="login_field" >
-                          <input class='input'
+                        <div className="login_field" >
+                          <input className='input'
                             type="password"
                             name="password"
                             onChange={handleChange}
@@ -68,7 +68,7 @@ function Register() {
                           {errors.password && touched.password && errors.password}
                           
                           <p>Already have an account? <a href="/login">Login!</a></p>
-                          <button class="btn-summit" type="submit" disabled={isSubmitting}>
+                          <button className="btn-summit" type="submit" disabled={isSubmitting}>
                             Register
                           </button>
                         </div>
@@ -77,11 +77,11 @@ function Register() {
                   </Formik>
                 </div>
               </div>
-            <div class="screen_background">
-              <span class="background_shape shape4"></span>
-              <span class="background_shape shape3"></span>		
-              <span class="background_shape shape2"></span>
-              <span class="background_shape shape1"></span>
+            <div className="screen_background">
+              <span className="background_shape shape4"></span>
+              <span className="background_shape shape3"></span>		
+              <span className="background_shape shape2"></span>
+              <span className="background_shape shape1"></span>
            </div>		
           </Col>
         </Row>

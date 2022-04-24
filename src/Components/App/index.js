@@ -13,7 +13,7 @@ function App() {
       <Navbar className="navbar">
         <Container>
           <Navbar.Brand href="#home">
-            <div class="todo-title">Todo Todo</div></Navbar.Brand>
+            <div className="todo-title">Todo Todo</div></Navbar.Brand>
         </Container>
       </Navbar>
       <Container>

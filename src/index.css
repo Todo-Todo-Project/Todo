@@ -154,6 +154,11 @@ code {
 .input:invalid{
   background-color: #6A679E;
   color: #FFF;
+  border: 1px solid red;
+}
+
+.error{
+	
 }
 
 p {

@@ -4,8 +4,10 @@ import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 
+
 function Login() {
   const navigate = useNavigate();
+
   return (
     <ThemeProvider
       breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
@@ -16,7 +18,7 @@ function Login() {
               <div className='screen_content'>
                 <div className='login'>
                   <div className='title'>Login</div>
-                  <Formik
+                  <Formik 
                     initialValues={{ email: '', password: '' }}
                     validate={values => {
                       const errors = {};
@@ -27,6 +29,7 @@ function Login() {
                       ) {
                         errors.email = 'Invalid email address';
                       }
+                      return errors;
                     }}
                     onSubmit={async (values, { setSubmitting }) => {
                       const authInfo = await login(values.email, values.password);
@@ -45,20 +48,19 @@ function Login() {
                         /* and other goodies */
                       }) => (
                       <form onSubmit={handleSubmit}>
-                        <div class="login_field" >
-                          <input class='input'
+                        <div className="login_field" >
+                          <input className='input'
                             type="email"
                             name="email"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.email}
                             placeholder="Email"
-                            title={errors.email}
                           />
                           {errors.email && touched.email && errors.email}
                         </div>
-                        <div class="login_field" >
-                          <input class='input'
+                        <div className="login_field" >
+                          <input className='input'
                             type="password"
                             name="password"
                             onChange={handleChange}
@@ -69,7 +71,7 @@ function Login() {
                           {errors.password && touched.password && errors.password}
                           
                           <p>New user? <a href="/register">Register!</a></p>
-                          <button class="btn-summit" type="submit" disabled={isSubmitting}>
+                          <button className="btn-summit" type="submit" disabled={isSubmitting}>
                             Login
                           </button>
                         </div>
@@ -78,11 +80,11 @@ function Login() {
                   </Formik>
                 </div>
               </div>
-            <div class="screen_background">
-              <span class="background_shape shape4"></span>
-              <span class="background_shape shape3"></span>		
-              <span class="background_shape shape2"></span>
-              <span class="background_shape shape1"></span>
+            <div className="screen_background">
+              <span className="background_shape shape4"></span>
+              <span className="background_shape shape3"></span>		
+              <span className="background_shape shape2"></span>
+              <span className="background_shape shape1"></span>
            </div>		
           </Col>
         </Row>
