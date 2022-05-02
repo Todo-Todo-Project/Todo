@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 
+
 function Register() {
   const navigate = useNavigate();
   return (
@@ -54,7 +55,7 @@ function Register() {
                             value={values.email}
                             placeholder="Email"
                           />
-                          {errors.email && touched.email && errors.email}
+                            {errors.email && touched.email && errors.email}
                         </div>
                         <div className="login_field" >
                           <input className='input'
@@ -75,6 +76,15 @@ function Register() {
                       </form>
                   )}
                   </Formik>
+                </div>
+                
+                <div className='social-login'>
+                  <h5>Log in via</h5>
+                  <div className="social-icons">
+                    <i className="social-login__icon fab fa-instagram"></i>
+                    <i className="social-login__icon fab fa-facebook"></i>
+                    <i className="social-login__icon fab fa-twitter"></i>
+                  </div>
                 </div>
               </div>
             <div className="screen_background">
