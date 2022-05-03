@@ -10,12 +10,12 @@ function App() {
     <ThemeProvider
       breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
     >
-      <Navbar className="navbar">
+      {/* <Navbar className="navbar">
         <Container>
           <Navbar.Brand href="#home">
             <div className="todo-title">Todo Todo</div></Navbar.Brand>
         </Container>
-      </Navbar>
+      </Navbar> */}
       <Container>
         {/* <Col md={1}>
           <Row md={1}>Left menu</Row>
