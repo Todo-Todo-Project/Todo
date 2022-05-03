@@ -1,0 +1,4 @@
+.add_new_todo_popup_body {
+    height: 500px;
+    overflow-y: scroll;
+}
