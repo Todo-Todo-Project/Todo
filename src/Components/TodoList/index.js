@@ -5,12 +5,14 @@ import AddTodo from "./../AddTodo/addTodo"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from 'react-icons/ai';
-
+import { BsFillTrashFill } from "react-icons/bs";
+import axios from "axios";
 
 function TodoList() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [todos, setTodos] = useState([]);
+    const [listDelete, setListDelete] = useState([])
     const navigate = useNavigate();
 
     // Note: the empty deps array [] means
@@ -84,6 +86,15 @@ function TodoList() {
             );
     }
 
+    function deleteListTodo() {
+        for (let i =0; i< listDelete.length; i++) {
+            axios
+            .delete("http://localhost:3000/todos/" + listDelete[i])
+            .then((res) => console.log(res));
+        }
+        window.location.reload();
+    }
+
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -94,10 +105,12 @@ function TodoList() {
               <div className="todolist_addTodo" onClick={()=> console.log("ddddd")}>
                 Add new Todo
                <AddTodo></AddTodo>
+               <BsFillTrashFill onClick={()=>deleteListTodo() }></BsFillTrashFill>
               </div>
                 <ul className="todo-list">
                     {todos.map((todo) => (
                         <TodoItem
+                        callBackWhenCheckedIsFalse={callBackCheckedIsFalse} callBackWhenCheckedIsTrue={callBackCheckedIsTrue}
                             key={todo._id}
                             name={todo.name}
                             isCompleted={todo.isCompleted}
@@ -108,6 +121,17 @@ function TodoList() {
                 </ul>
             </div>
         );
+    }
+
+    function callBackCheckedIsFalse(id) {
+        let index = listDelete.indexOf(id)
+        if (index !== -1) {
+            listDelete.splice(index,1)
+        }
+    }
+
+    function callBackCheckedIsTrue(id) {
+        listDelete.push(id)
     }
 }
 

@@ -132,10 +132,10 @@ function AddTodo() {
                 <h5>Expired Date</h5>
                 <input
                     type="date"
-                    value={ConvertDateToDisplayDate(newTodo.dueDate)}
+                    value={ConvertDateToDisplayDate(newTodo.duedate)}
                     onChange={(input) => {
                         let tempTodo = { ...newTodo };
-                        tempTodo.dueDate = input.target.value;
+                        tempTodo.duedate = input.target.value;
                         setNewTodo(tempTodo);
                     }}
                 ></input>

@@ -6,12 +6,17 @@ import { Dropdown, DropdownButton } from "react-bootstrap";
 import axios from "axios";
 import ToggleButton from "react-toggle-button";
 
-function EditTodo() {
+function EditTodo(props) {
     const [newTodo, setNewTodo] = useState(new Todo());
-    const [isCompleted, setCompleted] = useState(false)
     // useEffect(() => {
     //     axios.get("");
     // });
+
+    function updateTodo() {
+        axios
+            .put("http://localhost:3000/todos/" + props.id, newTodo)
+            .then((res) => console.log(res));
+    }
 
     return (
         <Popup
@@ -21,7 +26,18 @@ function EditTodo() {
             nested
             trigger={
                 <button className="AiOutlinePlus">
-                    <AiOutlineEdit onClick={() => console.log("clicked")}>
+                    <AiOutlineEdit
+                        onClick={() => {
+                            axios
+                                .get(
+                                    "http://localhost:3000/todos/todo/" +
+                                        props.id
+                                )
+                                .then((res) => {
+                                    setNewTodo(res.data[0]);
+                                });
+                        }}
+                    >
                         {" "}
                     </AiOutlineEdit>
                 </button>
@@ -32,9 +48,11 @@ function EditTodo() {
                     <div className="add_new_todo_popup_title modal-header">
                         <h2>Edit new todo</h2>
                         <ToggleButton
-                            value={isCompleted}
+                            value={newTodo.isCompleted}
                             onToggle={(value) => {
-                               setCompleted(!value)
+                                let todoTemp = {...newTodo}
+                                todoTemp.isCompleted = !value
+                                setNewTodo(todoTemp);
                             }}
                         />
                     </div>
@@ -57,11 +75,11 @@ function EditTodo() {
                                 <input
                                     type="date"
                                     value={ConvertDateToDisplayDate(
-                                        newTodo.dueDate
+                                        newTodo.duedate
                                     )}
                                     onChange={(input) => {
                                         let tempTodo = { ...newTodo };
-                                        tempTodo.dueDate = input.target.value;
+                                        tempTodo.duedate = input.target.value;
                                         setNewTodo(tempTodo);
                                     }}
                                 ></input>
@@ -136,6 +154,10 @@ function EditTodo() {
                             type="button"
                             className="btn btn-primary"
                             // onClick={() => {savingTodos()}}
+                            onClick={() => {
+                                updateTodo();
+                                window.location.reload();
+                            }}
                         >
                             SUBMIT
                         </button>
