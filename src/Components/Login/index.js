@@ -1,4 +1,4 @@
-import { Col, Container, Navbar, Row, ThemeProvider } from 'react-bootstrap';
+import { Col, Container, Row, ThemeProvider } from 'react-bootstrap';
 import { login } from './actions';
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';

@@ -4,7 +4,7 @@ import AddTodo from "./../AddTodo/addTodo"
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AiOutlinePlus } from 'react-icons/ai';
+// import { AiOutlinePlus } from 'react-icons/ai';
 
 
 function TodoList() {
@@ -23,7 +23,7 @@ function TodoList() {
     }, [isLoaded]);
 
     function loadAllTodos() {
-        console.log("loadAllTodos");
+        // console.log("loadAllTodos");
         const authString = localStorage.getItem("authInfo");
         const accessToken = authString && JSON.parse(authString).accessToken;
         const headers = { "Content-Type": "application/json" };

@@ -1,6 +1,6 @@
 import './App.css';
-import { Col, Container, Navbar, Row, ThemeProvider } from 'react-bootstrap';
-
+import { Col, Container, Row, ThemeProvider } from 'react-bootstrap';
+import Nav from '../Nav/index'
 import TodoList from '../TodoList';
 
 
@@ -16,6 +16,7 @@ function App() {
             <div className="todo-title">Todo Todo</div></Navbar.Brand>
         </Container>
       </Navbar> */}
+      <Nav></Nav>
       <Container>
         {/* <Col md={1}>
           <Row md={1}>Left menu</Row>

@@ -228,6 +228,7 @@ function AddTodo() {
 
     function savingTodos () {
         let user = JSON.parse(localStorage.authInfo).user
+        console.log(localStorage.authInfo);
         for(let i =0; i < newTodoList.length; i++) {
             newTodoList[i].email = user.email
             axios.post('http://localhost:3000/todos',newTodoList[i]).then((res)=> console.log(res))
