@@ -2,11 +2,28 @@ import { Col, Container, Navbar, Row, ThemeProvider } from 'react-bootstrap';
 import { login } from './actions';
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
+import GoogleLogin from 'react-google-login';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 
 function Login() {
   const navigate = useNavigate();
+
+  const handleFailure = (result) => {
+    alert(result);
+  }
+
+  const handleLogin = (response) => {
+    console.log(response)
+    axios({
+      method: "POST",
+      url: "http://localhost:3000/googlelogin",
+      data: {tokenId: response.tokenId}
+    }).then(response => {
+      console.log(response)
+    })
+  }
 
   return (
     <ThemeProvider
@@ -78,6 +95,15 @@ function Login() {
                       </form>
                   )}
                   </Formik>
+                  <div className='google_login'>
+                  <GoogleLogin
+                    clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                    buttonText = 'Login with Google'
+                    onSuccess = {handleLogin}
+                    onFailure = {handleFailure}
+                    cookiePolicy = {'single_host_origin'}
+                  ></GoogleLogin>
+                </div>
                 </div>
               </div>
             <div className="screen_background">
