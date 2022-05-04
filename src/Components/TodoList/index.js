@@ -102,9 +102,11 @@ function TodoList() {
     } else {
         return (
             <div>
-                <button onClick={()=> {
-                    setTodos([...sortByPriority(todos,true)])
-                }}>
+                <button
+                    onClick={() => {
+                        setTodos([...sortByPriority(todos, true)]);
+                    }}
+                >
                     button demo sort
                 </button>
                 <div
@@ -118,17 +120,25 @@ function TodoList() {
                     ></BsFillTrashFill>
                 </div>
                 <ul className="todo-list">
-                    {todos.map((todo) => (
-                        <TodoItem
-                            callBackWhenCheckedIsFalse={callBackCheckedIsFalse}
-                            callBackWhenCheckedIsTrue={callBackCheckedIsTrue}
-                            key={todo._id}
-                            name={todo.name}
-                            isCompleted={todo.isCompleted}
-                            id={todo._id}
-                            onToggle={() => handleToggleTodoItem(todo)}
-                        />
-                    ))}
+                    {todos ? (
+                        <h1>Have no todo here</h1>
+                    ) : (
+                        todos.map((todo) => (
+                            <TodoItem
+                                callBackWhenCheckedIsFalse={
+                                    callBackCheckedIsFalse
+                                }
+                                callBackWhenCheckedIsTrue={
+                                    callBackCheckedIsTrue
+                                }
+                                key={todo._id}
+                                name={todo.name}
+                                isCompleted={todo.isCompleted}
+                                id={todo._id}
+                                onToggle={() => handleToggleTodoItem(todo)}
+                            />
+                        ))
+                    )}
                 </ul>
             </div>
         );
@@ -216,18 +226,18 @@ function sortInByDueDate(arr) {
 //===========================================================
 
 function sortInByName(arr) {
-    let sorted = arr.sort((a, b) => 
+    let sorted = arr.sort((a, b) =>
         a.name < b.name ? -1 : a.name > b.name ? 1 : 0
     );
-    console.log(sorted)
+    console.log(sorted);
     return sorted;
 }
 
 function sortDeByName(arr) {
-    let sorted = arr.sort((b, a) => 
+    let sorted = arr.sort((b, a) =>
         a.name < b.name ? -1 : a.name > b.name ? 1 : 0
     );
-    console.log(sorted)
+    console.log(sorted);
     return sorted;
 }
 
