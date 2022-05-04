@@ -2,6 +2,7 @@ import "./App.css";
 import { Col, Container, Navbar, Row, ThemeProvider } from "react-bootstrap";
 
 import TodoList from "../TodoList";
+import ListTodoList from "../ListTodoList/ListTodoList"
 
 function App() {
     const todos = [
@@ -37,10 +38,10 @@ function App() {
             </div>
             <div className="body-content row">
                 <div className="col">
-                    <TodoList todos={todos} />
+                    <ListTodoList />
                 </div>
                 <div className="col">
-                    <TodoList todos={todos} />
+                    <TodoList />
                 </div>
             </div>
         </div>
