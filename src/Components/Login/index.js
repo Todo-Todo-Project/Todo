@@ -2,11 +2,30 @@ import { Col, Container, Row, ThemeProvider } from 'react-bootstrap';
 import { login } from './actions';
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
+import GoogleLogin from 'react-google-login';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 
 function Login() {
+  const [error, setError] = useState(null);
+  
   const navigate = useNavigate();
+
+  const handleFailure = (result) => {
+    alert(result);
+  }
+
+  const handleLogin = (response) => {
+    console.log(response)
+    axios({
+      method: "POST",
+      url: "http://localhost:3000/users/googlelogin",
+      data: {tokenId: response.tokenId}
+    }).then(response => {
+      console.log(response)
+    })
+  }
 
   return (
     <ThemeProvider
@@ -33,8 +52,12 @@ function Login() {
                     }}
                     onSubmit={async (values, { setSubmitting }) => {
                       const authInfo = await login(values.email, values.password);
-                      localStorage.setItem('authInfo', JSON.stringify(authInfo));
-                      navigate('/home');
+                      if (authInfo.user) {
+                        localStorage.setItem('authInfo', JSON.stringify(authInfo));
+                        navigate('/home');
+                      } else {
+                        setError(authInfo.errors);
+                      }
                     }}
                   >
                     {({
@@ -78,6 +101,15 @@ function Login() {
                       </form>
                   )}
                   </Formik>
+                  <div className='google_login'>
+                  <GoogleLogin
+                    clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                    buttonText = 'Login with Google'
+                    onSuccess = {handleLogin}
+                    onFailure = {handleFailure}
+                    cookiePolicy = {'single_host_origin'}
+                  ></GoogleLogin>
+                </div>
                 </div>
               </div>
             <div className="screen_background">
