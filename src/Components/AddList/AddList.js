@@ -26,7 +26,7 @@ function AddList() {
             trigger={
                 <button className="AiOutlinePlus">
                     <AiOutlinePlus onClick={() => console.log("clicked")}>
-                        {" "}
+                        {" "}   
                     </AiOutlinePlus>
                 </button>
             }
@@ -39,7 +39,9 @@ function AddList() {
                     <div className="add_new_list_todo_popup_body modal-body">
                         <div>
                             <input type="text" value={newList.listName} onChange={(input)=>{
-                                setNewList(input.target.value)
+                                let tempList = {...newList}
+                                tempList.listName = input.target.value
+                                setNewList(tempList)
                             }}></input>
                         </div>
                     </div>
