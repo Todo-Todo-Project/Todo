@@ -49,7 +49,6 @@ function ListTodoList() {
                 (res) => {
                     setIsLoaded(true);
                     setLists(res);
-                    console.log(lists)
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -60,7 +59,6 @@ function ListTodoList() {
                 }
             );
     }
-
     function handleToggleTodoItem(todo) {
         const accessToken =
             localStorage.getItem("authInfo") &&
@@ -112,7 +110,7 @@ function ListTodoList() {
                     button demo sort    
                 </button> */}
                 <div
-                    className="list_todolist_addTodo"
+                    className="list_todolist_addList"
                 >
                     Add new list
                     <AddList></AddList>
@@ -125,7 +123,7 @@ function ListTodoList() {
                     {lists.map((list) => (
                         <ListItem
                             key={list._id}
-                            name={list.name}
+                            name={list.listName}
                             isCompleted={list.isCompleted}
                             id={list._id}
                             onToggle={() => handleToggleTodoItem(list)}

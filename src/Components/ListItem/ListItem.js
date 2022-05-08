@@ -19,11 +19,6 @@ function ListItem(props) {
 
     return (
         <li>
-            <input
-                type="checkbox"
-                checked={props.isCompleted}
-                onChange={props.onToggle}
-            />
             <div>{props.name}</div>
             <EditTodo id={props.id}></EditTodo>
             <BsFillTrashFill

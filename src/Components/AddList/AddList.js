@@ -8,17 +8,14 @@ import axios from 'axios';
 // import "./addTodo.css"
 
 function AddList() {
-    const [newTodoList, setNewTodoList] = useState([]);
-    const [newList, setNewList] = useState(new Todo());
+    const [newList, setNewList] = useState(new List());
 
 
-    // function savingTodos () {
-    //     let user = JSON.parse(localStorage.authInfo).user
-    //     for(let i =0; i < newTodoList.length; i++) {
-    //         newTodoList[i].email = user.email
-    //         axios.post('http://localhost:3000/todos',newTodoList[i]).then((res)=> console.log(res))
-    //     }
-    // }
+    function savingList () {
+        let user = JSON.parse(localStorage.authInfo).user
+        newList.ownerId = user._id
+        axios.post('http://localhost:3000/lists',newList).then((res)=> console.log(res))
+    }
 
     return (
         <Popup
@@ -41,7 +38,7 @@ function AddList() {
                     </div>
                     <div className="add_new_list_todo_popup_body modal-body">
                         <div>
-                            <input type="text" value={newList} onChange={(input)=>{
+                            <input type="text" value={newList.listName} onChange={(input)=>{
                                 setNewList(input.target.value)
                             }}></input>
                         </div>
@@ -50,7 +47,7 @@ function AddList() {
                         <button
                             type="button"
                             className="btn btn-primary"
-                            // onClick={() => {savingTodos()}}
+                            onClick={() => {savingList()}}
                         >
                             SUBMIT
                         </button>
@@ -72,14 +69,10 @@ function AddList() {
 
 export default AddList;
 
-class Todo {
-    email = ""
-    name = "my todo";
-    priority = "Normal";
-    description = "";
-    creationdate = new Date();
-    duedate = new Date();
-    isCompleted = false;
+class List {
+    ownerId = ""
+    listName = "my todo";
+    todos = [];
 }
 
 function ConvertDateToDisplayDate(inputDate) {
