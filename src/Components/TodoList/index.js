@@ -4,14 +4,9 @@ import AddTodo from "./../AddTodo/addTodo";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-// import { AiOutlinePlus } from 'react-icons/ai';
-
-=======
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
->>>>>>> 2e1feb4aac9f273cbb2fe21c9673f8fde4597dbd
 
 function TodoList() {
     const [error, setError] = useState(null);
