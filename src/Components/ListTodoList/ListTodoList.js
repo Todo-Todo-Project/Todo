@@ -2,7 +2,7 @@
 // import TodoItem from "../TodoItem";
 // import AddTodo from "./../AddTodo/addTodo";
 import AddList from "../AddList/AddList";
-import ListItem from "../ListItem/ListItem"; 
+import ListItem from "../ListItem/ListItem";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ function ListTodoList() {
     // this useEffect will run once
     // similar to componentDidMount()
     useEffect(() => {
-        console.log("listtodolist")
+        console.log("listtodolist");
         if (!isLoaded) {
             loadAllTodos();
         }
@@ -102,33 +102,34 @@ function ListTodoList() {
     } else if (!isLoaded) {
         return <div>Loading...</div>;
     } else {
-        return ( 
+        return (
             <div>
                 {/* <button onClick={()=> {
                     setTodos([...sortByPriority(todos,true)])
                 }}>
                     button demo sort    
                 </button> */}
-                <div
-                    className="list_todolist_addList"
-                >
+                <div className="list_todolist_addList">
                     Add new list
                     <AddList></AddList>
                     <BsFillTrashFill
-                        // onClick={() => deleteListTodo()}
+                    // onClick={() => deleteListTodo()}
                     ></BsFillTrashFill>
                 </div>
                 <ul className="list-list">
-                    
-                    {lists.map((list) => (
-                        <ListItem
-                            key={list._id}
-                            name={list.listName}
-                            isCompleted={list.isCompleted}
-                            id={list._id}
-                            onToggle={() => handleToggleTodoItem(list)}
-                        />
-                    ))}
+                    {lists.length === undefined ? (
+                        <h1>Have no list here</h1>
+                    ) : (
+                        lists.map((list) => (
+                            <ListItem
+                                key={list._id}
+                                name={list.listName}
+                                isCompleted={list.isCompleted}
+                                id={list._id}
+                                onToggle={() => handleToggleTodoItem(list)}
+                            />
+                        ))
+                    )}
                 </ul>
             </div>
         );
@@ -146,4 +147,4 @@ function ListTodoList() {
     // }
 }
 
-export default ListTodoList
+export default ListTodoList;

@@ -1,30 +1,24 @@
 import EditTodo from "../EditTodo/editTodo";
+import EditList from "../EditList/editList";
 import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
 
 function ListItem(props) {
-    // function deleteTodo() {
-    //     axios
-    //         .delete("http://localhost:3000/todos/" + props.id)
-    //         .then((res) => console.log(res));
-    // }
-
-    // function callBackWhenCheckedIsFalse () {
-    //   props.callBackWhenCheckedIsFalse(props.id)
-    // }
-
-    // function callBackWhenCheckedIsTrue () {
-    //   props.callBackWhenCheckedIsTrue(props.id)
-    // }
+    function deleteList() {
+        console.log(props.id)
+        axios
+            .delete("http://localhost:3000/lists/" + props.id)
+            .then((res) => console.log(res));
+    }
 
     return (
         <li>
             <div>{props.name}</div>
-            <EditTodo id={props.id}></EditTodo>
+            <EditList id={props.id}></EditList>
             <BsFillTrashFill
                 onClick={() => {
-                    // deleteTodo();
-                    window.location.reload();
+                    deleteList();
+                    // window.location.reload();
                 }}
             ></BsFillTrashFill>
         </li>
