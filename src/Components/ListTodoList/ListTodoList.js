@@ -35,7 +35,10 @@ function ListTodoList() {
         if (accessToken) {
             headers.Authorization = `Bearer ${accessToken}`;
         }
-        fetch(`${process.env.REACT_APP_API_URL}/lists`, { headers })
+
+        let user = JSON.parse(localStorage.authInfo).user
+        let ownerId = user._id
+        fetch(`${process.env.REACT_APP_API_URL}/lists/${ownerId}`, { headers })
             .then((res) => {
                 console.log(res);
                 if (res.status === 401) {
@@ -49,6 +52,7 @@ function ListTodoList() {
                 (res) => {
                     setIsLoaded(true);
                     setLists(res);
+                    console.log(res)
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
