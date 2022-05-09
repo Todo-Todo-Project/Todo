@@ -7,17 +7,20 @@ import axios from "axios";
 function EditList(props) {
     const [list, setList] = useState(new List());
 
-    useEffect(() => {
+    function getList() {
         let user = JSON.parse(localStorage.authInfo).user;
-        axios.get("http://localhost:3000/lists/lists/" + user.email).then((res) => {
+        axios.get("http://localhost:3000/lists/" + user._id).then((res) => {
             setList(res.data[0]);
             console.log(res.data[0])
         });
-    });
+    }
 
     function updateList() {
+        let user = JSON.parse(localStorage.authInfo).user;
+        let ownerId = user._id;
+        list.ownerId = ownerId;
         axios
-            .put("http://localhost:3000/lists/" + props.id, list)
+            .put("http://localhost:3000/lists/", list)
             .then((res) => console.log(res));
     }
 
@@ -29,7 +32,7 @@ function EditList(props) {
             nested
             trigger={
                 <button className="AiOutlinePlus">
-                    <AiOutlineEdit onClick={() => {}}> </AiOutlineEdit>
+                    <AiOutlineEdit onClick={() => {getList()}}> </AiOutlineEdit>
                 </button>
             }
         >
@@ -90,7 +93,6 @@ export default EditList;
 class List {
     ownerId = "";
     listName = "my todo";
-    todos = [];
 }
 
 function ConvertDateToDisplayDate(inputDate) {

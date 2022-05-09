@@ -10,6 +10,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
 
+import "./ListTodoList.css"
+
 function ListTodoList() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -68,9 +70,9 @@ function ListTodoList() {
     } else {
         return (
             <div>
-                <div className="list_todolist_addList">
-                    Add new list
-                    <AddList></AddList>
+                <div className="list_todolist_addList row">
+                    <h4 className="col">Add new list</h4>
+                    <div className="col"> <AddList></AddList></div>
                 </div>
                 <ul className="list-list">
                     {lists.length === undefined ? (

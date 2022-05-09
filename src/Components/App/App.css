@@ -39,5 +39,8 @@
 
 .body-content {
   position: relative;
+  font-size: larger;
+  width: 80%;
+  left: 10%;
   top: 100px;
 }

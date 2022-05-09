@@ -73,7 +73,7 @@ export default AddList;
 
 class List {
     ownerId = ""
-    listName = "my todo";
+    listName = "My list";
     todos = [];
 }
 
