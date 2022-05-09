@@ -14,12 +14,8 @@ function ListTodoList() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [lists, setLists] = useState([]);
-    const [listDelete, setListDelete] = useState([]);
     const navigate = useNavigate();
 
-    // Note: the empty deps array [] means
-    // this useEffect will run once
-    // similar to componentDidMount()
     useEffect(() => {
         console.log("listtodolist");
         if (!isLoaded) {
@@ -36,8 +32,8 @@ function ListTodoList() {
             headers.Authorization = `Bearer ${accessToken}`;
         }
 
-        let user = JSON.parse(localStorage.authInfo).user
-        let ownerId = user._id
+        let user = JSON.parse(localStorage.authInfo).user;
+        let ownerId = user._id;
         fetch(`${process.env.REACT_APP_API_URL}/lists/${ownerId}`, { headers })
             .then((res) => {
                 console.log(res);
@@ -52,39 +48,8 @@ function ListTodoList() {
                 (res) => {
                     setIsLoaded(true);
                     setLists(res);
-                    console.log(res)
+                    console.log(res);
                 },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            );
-    }
-    function handleToggleTodoItem(todo) {
-        const accessToken =
-            localStorage.getItem("authInfo") &&
-            localStorage.getItem("authInfo").accessToken;
-        const headers = { "Content-Type": "application/json" };
-        if (accessToken) {
-            headers.Authorization = `Bearer ${accessToken}`;
-        }
-        fetch(`${process.env.REACT_APP_API_URL}/todos/${todo._id}`, {
-            method: "PUT",
-            headers,
-            body: JSON.stringify({ ...todo, isCompleted: !todo.isCompleted }),
-        })
-            .then((res) => res.json())
-            .then(
-                (res) => {
-                    setIsLoaded(true);
-                    loadAllTodos();
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
                 (error) => {
                     setIsLoaded(true);
                     setError(error);
@@ -92,15 +57,10 @@ function ListTodoList() {
             );
     }
 
-    // function deleteListTodo() {
-    //     for (let i = 0; i < listDelete.length; i++) {
-    //         axios
-    //             .delete("http://localhost:3000/todos/" + listDelete[i])
-    //             .then((res) => console.log(res));
-    //     }
-    //     window.location.reload();
-    // }
-    // sortDeByName(todos);
+    function deleteListTodo() {
+        console.log(lists);
+    }
+
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -108,17 +68,9 @@ function ListTodoList() {
     } else {
         return (
             <div>
-                {/* <button onClick={()=> {
-                    setTodos([...sortByPriority(todos,true)])
-                }}>
-                    button demo sort    
-                </button> */}
                 <div className="list_todolist_addList">
                     Add new list
                     <AddList></AddList>
-                    <BsFillTrashFill
-                    // onClick={() => deleteListTodo()}
-                    ></BsFillTrashFill>
                 </div>
                 <ul className="list-list">
                     {lists.length === undefined ? (
@@ -128,9 +80,7 @@ function ListTodoList() {
                             <ListItem
                                 key={list._id}
                                 name={list.listName}
-                                isCompleted={list.isCompleted}
                                 id={list._id}
-                                onToggle={() => handleToggleTodoItem(list)}
                             />
                         ))
                     )}

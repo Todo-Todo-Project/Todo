@@ -43,6 +43,9 @@ function App() {
                 <div className="col">
                     <TodoList />
                 </div>
+                <div className="col">
+                    <TodoList />
+                </div>
             </div>
         </div>
     );

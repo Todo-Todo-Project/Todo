@@ -5,9 +5,8 @@ import axios from "axios";
 
 function ListItem(props) {
     function deleteList() {
-        console.log(props.id)
         axios
-            .delete("http://localhost:3000/lists/" + props.id)
+            .delete("http://localhost:3000/lists/", { data: { _id: props.id } })
             .then((res) => console.log(res));
     }
 
