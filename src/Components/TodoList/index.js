@@ -8,7 +8,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
 
-function TodoList() {
+function TodoList(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [todos, setTodos] = useState([]);
@@ -19,20 +19,20 @@ function TodoList() {
     // this useEffect will run once
     // similar to componentDidMount()
     useEffect(() => {
-        if (!isLoaded) {
-            loadAllTodos();
-        }
-    }, [isLoaded]);
+        console.log(props.listId);
+        loadAllTodos();
+    }, [isLoaded, props.listId]);
 
     function loadAllTodos() {
-        // console.log("loadAllTodos");
         const authString = localStorage.getItem("authInfo");
         const accessToken = authString && JSON.parse(authString).accessToken;
         const headers = { "Content-Type": "application/json" };
         if (accessToken) {
             headers.Authorization = `Bearer ${accessToken}`;
         }
-        fetch(`${process.env.REACT_APP_API_URL}/todos`, { headers })
+        fetch(`${process.env.REACT_APP_API_URL}/todos/list/${props.listId}`, {
+            headers,
+        })
             .then((res) => {
                 console.log(res);
                 if (res.status === 401) {
@@ -46,6 +46,7 @@ function TodoList() {
                 (res) => {
                     setIsLoaded(true);
                     setTodos(res);
+                    console.log(res);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -102,25 +103,24 @@ function TodoList() {
     } else {
         return (
             <div>
-                <button
+                {/* <button
                     onClick={() => {
                         setTodos([...sortByPriority(todos, true)]);
                     }}
                 >
                     button demo sort
-                </button>
-                <div
-                    className="todolist_addTodo"
-                    onClick={() => console.log("ddddd")}
-                >
-                    Add new Todo
-                    <AddTodo></AddTodo>
-                    <BsFillTrashFill
-                        onClick={() => deleteListTodo()}
-                    ></BsFillTrashFill>
+                </button> */}
+                <div className="todolist_addTodo row">
+                    <h4 className="col-7">Add new Todo</h4>
+                    <div className="col">
+                        <AddTodo></AddTodo>
+                        <BsFillTrashFill
+                            onClick={() => deleteListTodo()}
+                        ></BsFillTrashFill>
+                    </div>
                 </div>
                 <ul className="todo-list">
-                    {todos ? (
+                    {todos.length === undefined ? (
                         <h1>Have no todo here</h1>
                     ) : (
                         todos.map((todo) => (

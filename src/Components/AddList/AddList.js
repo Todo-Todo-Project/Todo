@@ -3,18 +3,19 @@ import "reactjs-popup/dist/index.css";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { Dropdown, DropdownButton } from "react-bootstrap";
-import axios from 'axios';
+import axios from "axios";
 
 // import "./addTodo.css"
 
-function AddList() {
+function AddList(props) {
     const [newList, setNewList] = useState(new List());
 
-
-    function savingList () {
-        let user = JSON.parse(localStorage.authInfo).user
-        newList.ownerId = user._id
-        axios.post('http://localhost:3000/lists',newList).then((res)=> console.log(res))
+    function savingList() {
+        let user = JSON.parse(localStorage.authInfo).user;
+        newList.ownerId = user._id;
+        axios
+            .post("http://localhost:3000/lists", newList)
+            .then((res) => console.log(res));
     }
 
     return (
@@ -26,7 +27,7 @@ function AddList() {
             trigger={
                 <button className="AiOutlinePlus">
                     <AiOutlinePlus onClick={() => console.log("clicked")}>
-                        {" "}   
+                        {" "}
                     </AiOutlinePlus>
                 </button>
             }
@@ -34,22 +35,30 @@ function AddList() {
             {(close) => (
                 <div className="add_new_list_todo_popup">
                     <div className="add_new_list_todo_popup_title modal-header">
-                        <h2>Add new todo</h2>
+                        <h2>Add new list</h2>
                     </div>
                     <div className="add_new_list_todo_popup_body modal-body">
                         <div>
-                            <input type="text" value={newList.listName} onChange={(input)=>{
-                                let tempList = {...newList}
-                                tempList.listName = input.target.value
-                                setNewList(tempList)
-                            }}></input>
+                            <input
+                                type="text"
+                                value={newList.listName}
+                                onChange={(input) => {
+                                    let tempList = { ...newList };
+                                    tempList.listName = input.target.value;
+                                    setNewList(tempList);
+                                }}
+                            ></input>
                         </div>
                     </div>
                     <div className="add_new_list_todo_popup_footer modal-footer">
                         <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={() => {savingList()}}
+                            onClick={() => {
+                                savingList();
+                                close();
+                                props.addNewListCallBack();
+                            }}
                         >
                             SUBMIT
                         </button>
@@ -72,7 +81,7 @@ function AddList() {
 export default AddList;
 
 class List {
-    ownerId = ""
+    ownerId = "";
     listName = "My list";
     todos = [];
 }

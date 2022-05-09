@@ -1,6 +1,7 @@
 import EditTodo from "../EditTodo/editTodo";
 import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
+import { useEffect } from "react";
 
 function TodoItem(props) {
     function deleteTodo() {
@@ -9,42 +10,51 @@ function TodoItem(props) {
             .then((res) => console.log(res));
     }
 
-    function callBackWhenCheckedIsFalse () {
-      props.callBackWhenCheckedIsFalse(props.id)
+    function callBackWhenCheckedIsFalse() {
+        props.callBackWhenCheckedIsFalse(props.id);
     }
 
-    function callBackWhenCheckedIsTrue () {
-      props.callBackWhenCheckedIsTrue(props.id)
+    function callBackWhenCheckedIsTrue() {
+        props.callBackWhenCheckedIsTrue(props.id);
     }
 
     return (
-        <li>
-            <input
-                type="checkbox"
-                onChange={(input)=> {
-                  if (input.target.checked) {
-                    callBackWhenCheckedIsTrue()
-                  }
+        <div className="row">
+            <div className="col row">
+                <div className="col">
+                    <input
+                        type="checkbox"
+                        onChange={(input) => {
+                            if (input.target.checked) {
+                                callBackWhenCheckedIsTrue();
+                            }
 
-                  if (!input.target.checked) {
-                    callBackWhenCheckedIsFalse()
-                  }
-                }}
-            />
-            <input
-                type="checkbox"
-                checked={props.isCompleted}
-                onChange={props.onToggle}
-            />
-            <div>{props.name}</div>
-            <EditTodo id={props.id}></EditTodo>
-            <BsFillTrashFill
-                onClick={() => {
-                    deleteTodo();
-                    window.location.reload();
-                }}
-            ></BsFillTrashFill>
-        </li>
+                            if (!input.target.checked) {
+                                callBackWhenCheckedIsFalse();
+                            }
+                        }}
+                    />
+                </div>
+                <div className="col">
+                    <input
+                        type="checkbox"
+                        checked={props.isCompleted}
+                        onChange={props.onToggle}
+                    />
+                </div>
+            </div>
+
+            <div className="col-5">{props.name}</div>
+            <div className="col">
+                <EditTodo id={props.id}></EditTodo>
+                <BsFillTrashFill
+                    onClick={() => {
+                        deleteTodo();
+                        window.location.reload();
+                    }}
+                ></BsFillTrashFill>
+            </div>
+        </div>
     );
 }
 

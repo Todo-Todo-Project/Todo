@@ -9,9 +9,8 @@ function EditList(props) {
 
     function getList() {
         let user = JSON.parse(localStorage.authInfo).user;
-        axios.get("http://localhost:3000/lists/" + user._id).then((res) => {
+        axios.get("http://localhost:3000/lists/list/" + props.id).then((res) => {
             setList(res.data[0]);
-            console.log(res.data[0])
         });
     }
 
@@ -67,7 +66,8 @@ function EditList(props) {
                             className="btn btn-primary"
                             onClick={() => {
                                 updateList();
-                                window.location.reload();
+                                close();
+                                props.editListCallBack();
                             }}
                         >
                             SUBMIT

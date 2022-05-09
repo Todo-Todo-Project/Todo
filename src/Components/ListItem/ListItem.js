@@ -9,20 +9,33 @@ function ListItem(props) {
             .then((res) => console.log(res));
     }
 
+    function itemOfListCallback() {
+        props.itemOfListCallBack(props.id)
+    }
+
     return (
-        <div className="row" onClick={()=> {}}>
-            <div className="col-7" >{props.name}</div>
+        <div
+            className="row"
+            onClick={() => {
+                itemOfListCallback();
+            }}
+        >
+            <div className="col-7">{props.name}</div>
             <div className="col">
-                <EditList id={props.id}></EditList>
+                <EditList id={props.id} editListCallBack={editListCallBack}></EditList>
                 <BsFillTrashFill
                     onClick={() => {
                         deleteList();
-                        window.location.reload();
+                        props.listItemDeleteCallBack()
                     }}
                 ></BsFillTrashFill>
             </div>
         </div>
     );
+
+    function editListCallBack() {
+        props.listItemEditCallBack();
+    }
 }
 
 export default ListItem;

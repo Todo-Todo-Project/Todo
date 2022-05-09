@@ -4,26 +4,27 @@
 import AddList from "../AddList/AddList";
 import ListItem from "../ListItem/ListItem";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
 
-import "./ListTodoList.css"
+import "./ListTodoList.css";
+import { propTypes } from "react-bootstrap/esm/Image";
 
-function ListTodoList() {
+function ListTodoList(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [lists, setLists] = useState([]);
+    const [listId, setListId] = useState("");
+    const [rerender, setRerender] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
         console.log("listtodolist");
-        if (!isLoaded) {
-            loadAllTodos();
-        }
-    }, [isLoaded]);
+        loadAllTodos();
+    }, [isLoaded, rerender]);
 
     function loadAllTodos() {
         console.log("loadAllTodos");
@@ -38,7 +39,6 @@ function ListTodoList() {
         let ownerId = user._id;
         fetch(`${process.env.REACT_APP_API_URL}/lists/${ownerId}`, { headers })
             .then((res) => {
-                console.log(res);
                 if (res.status === 401) {
                     setError("Unauthorized");
                     navigate("/login");
@@ -50,7 +50,6 @@ function ListTodoList() {
                 (res) => {
                     setIsLoaded(true);
                     setLists(res);
-                    console.log(res);
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -71,8 +70,13 @@ function ListTodoList() {
         return (
             <div>
                 <div className="list_todolist_addList row">
-                    <h4 className="col">Add new list</h4>
-                    <div className="col"> <AddList></AddList></div>
+                    <h4 className="col-7">Add new list</h4>
+                    <div className="col">
+                        {" "}
+                        <AddList
+                            addNewListCallBack={addNewListCallBack}
+                        ></AddList>
+                    </div>
                 </div>
                 <ul className="list-list">
                     {lists.length === undefined ? (
@@ -80,6 +84,9 @@ function ListTodoList() {
                     ) : (
                         lists.map((list) => (
                             <ListItem
+                                itemOfListCallBack={itemOfListCallBack}
+                                listItemDeleteCallBack={listItemDeleteCallBack}
+                                listItemEditCallBack={listItemEditCallBack}
                                 key={list._id}
                                 name={list.listName}
                                 id={list._id}
@@ -91,16 +98,22 @@ function ListTodoList() {
         );
     }
 
-    // function callBackCheckedIsFalse(id) {
-    //     let index = listDelete.indexOf(id);
-    //     if (index !== -1) {
-    //         listDelete.splice(index, 1);
-    //     }
-    // }
+    function itemOfListCallBack(listId) {
+        setListId(listId);
+        props.idOfListCallBack(listId);
+    }
 
-    // function callBackCheckedIsTrue(id) {
-    //     listDelete.push(id);
-    // }
+    function addNewListCallBack() {
+        setRerender(!rerender);
+    }
+
+    function listItemDeleteCallBack() {
+        setRerender(!rerender)
+    }
+
+    function listItemEditCallBack() {
+        setRerender(!rerender)
+    }
 }
 
 export default ListTodoList;
