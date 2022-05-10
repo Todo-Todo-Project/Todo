@@ -1,7 +1,7 @@
 import "./TodoList.css";
 import TodoItem from "../TodoItem";
 import AddTodo from "./../AddTodo/addTodo";
-
+import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -14,6 +14,7 @@ function TodoList(props) {
     const [todos, setTodos] = useState([]);
     const [listDelete, setListDelete] = useState([]);
     const [reload, setReload] = useState(false);
+    const [sortMethod, setSortMethod] = useState("Sort")
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -43,7 +44,6 @@ function TodoList(props) {
                 (res) => {
                     setIsLoaded(true);
                     setTodos(res);
-                    console.log(res);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -100,13 +100,6 @@ function TodoList(props) {
     } else {
         return (
             <div>
-                {/* <button
-                    onClick={() => {
-                        setTodos([...sortByPriority(todos, true)]);
-                    }}
-                >
-                    button demo sort
-                </button> */}
                 <div className="todolist_addTodo row">
                     <h4 className="col-7">Add new Todo</h4>
                     <div className="col">
@@ -116,6 +109,78 @@ function TodoList(props) {
                         <BsFillTrashFill
                             onClick={() => deleteListTodo()}
                         ></BsFillTrashFill>
+                    </div>
+                    <div className="col">
+                        <DropdownButton
+                            className="drop-down-button"
+                            id="dropdown-basic-button"
+                            title={sortMethod}
+                        >
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setTodos(sortByPriority(todos, false));
+                                    setSortMethod("Decrease priority")
+                                }}
+                            >
+                                Decrease priority
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setTodos(sortByPriority(todos, true));
+                                    setSortMethod("Increase priority")
+                                }}
+                            >
+                                Increase priority
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setTodos(sortDeByCreationDate(todos));
+                                    setSortMethod("Decrease creation date")
+                                }}
+                            >
+                                Decrease creation date
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setTodos(sortInByCreationDate(todos));
+                                    setSortMethod("Increase creation date")
+                                }}
+                            >
+                                Increase creation date
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setTodos(sortDeByDueDate(todos));
+                                    setSortMethod("Decrease due date")
+                                }}
+                            >
+                                Decrease due date
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setTodos(sortInByDueDate(todos));
+                                    setSortMethod("Increase due date")
+                                }}
+                            >
+                                Increase due date
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setTodos(sortDeByName(todos));
+                                    setSortMethod("Decrease name")
+                                }}
+                            >
+                                Decrease name
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                onClick={() => {
+                                    setTodos(sortInByName(todos));
+                                    setSortMethod("Increase name")
+                                }}
+                            >
+                                Increase name
+                            </Dropdown.Item>
+                        </DropdownButton>
                     </div>
                 </div>
                 <ul className="todo-list">
@@ -136,13 +201,11 @@ function TodoList(props) {
                                 callBackWhenTodoWasDeleted={
                                     callBackWhenTodoWasDeleted
                                 }
-
-                                idOfTodoCallBack={
-                                    idOfTodoCallBack
-                                }
+                                idOfTodoCallBack={idOfTodoCallBack}
                                 key={todo._id}
                                 name={todo.name}
                                 isCompleted={todo.isCompleted}
+                                priority={todo.priority}
                                 id={todo._id}
                                 onToggle={() => handleToggleTodoItem(todo)}
                             />
@@ -225,28 +288,32 @@ function sortDeByCreationDate(arr) {
     const sorted = arr.sort((a, b) => {
         return new Date(b.creationdate) - new Date(a.creationdate);
     });
-    return sorted;
+    let temp = [... sorted]
+    return temp;
 }
 
 function sortInByCreationDate(arr) {
     const sorted = arr.sort((a, b) => {
         return new Date(a.creationdate) - new Date(b.creationdate);
     });
-    return sorted;
+    let temp = [... sorted]
+    return temp;
 }
 
 function sortDeByDueDate(arr) {
     const sorted = arr.sort((a, b) => {
         return new Date(b.duedate) - new Date(a.duedate);
     });
-    return sorted;
+    let temp = [... sorted]
+    return temp;
 }
 
 function sortInByDueDate(arr) {
     const sorted = arr.sort((a, b) => {
         return new Date(a.duedate) - new Date(b.duedate);
     });
-    return sorted;
+    let temp = [... sorted]
+    return temp;
 }
 //===========================================================
 
@@ -254,16 +321,16 @@ function sortInByName(arr) {
     let sorted = arr.sort((a, b) =>
         a.name < b.name ? -1 : a.name > b.name ? 1 : 0
     );
-    console.log(sorted);
-    return sorted;
+    let temp = [... sorted]
+    return temp;
 }
 
 function sortDeByName(arr) {
     let sorted = arr.sort((b, a) =>
         a.name < b.name ? -1 : a.name > b.name ? 1 : 0
     );
-    console.log(sorted);
-    return sorted;
+    let temp = [... sorted]
+    return temp;
 }
 
 //=========================================================
