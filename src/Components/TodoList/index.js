@@ -13,15 +13,12 @@ function TodoList(props) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [todos, setTodos] = useState([]);
     const [listDelete, setListDelete] = useState([]);
+    const [reload, setReload] = useState(false);
     const navigate = useNavigate();
 
-    // Note: the empty deps array [] means
-    // this useEffect will run once
-    // similar to componentDidMount()
     useEffect(() => {
-        console.log(props.listId);
         loadAllTodos();
-    }, [isLoaded, props.listId]);
+    }, [isLoaded, props.listId, reload]);
 
     function loadAllTodos() {
         const authString = localStorage.getItem("authInfo");
@@ -113,7 +110,9 @@ function TodoList(props) {
                 <div className="todolist_addTodo row">
                     <h4 className="col-7">Add new Todo</h4>
                     <div className="col">
-                        <AddTodo></AddTodo>
+                        <AddTodo
+                            callBackWhenTodoWasAdded={callBackWhenTodoWasAdded}
+                        ></AddTodo>
                         <BsFillTrashFill
                             onClick={() => deleteListTodo()}
                         ></BsFillTrashFill>
@@ -130,6 +129,16 @@ function TodoList(props) {
                                 }
                                 callBackWhenCheckedIsTrue={
                                     callBackCheckedIsTrue
+                                }
+                                callBackWhenTodoWasEdited={
+                                    callBackWhenTodoWasEdited
+                                }
+                                callBackWhenTodoWasDeleted={
+                                    callBackWhenTodoWasDeleted
+                                }
+
+                                idOfTodoCallBack={
+                                    idOfTodoCallBack
                                 }
                                 key={todo._id}
                                 name={todo.name}
@@ -153,6 +162,22 @@ function TodoList(props) {
 
     function callBackCheckedIsTrue(id) {
         listDelete.push(id);
+    }
+
+    function callBackWhenTodoWasEdited() {
+        setReload(!reload);
+    }
+
+    function callBackWhenTodoWasDeleted() {
+        setReload(!reload);
+    }
+
+    function callBackWhenTodoWasAdded() {
+        setReload(!reload);
+    }
+
+    function idOfTodoCallBack(todoId) {
+        props.idOfTodoCallBack(todoId);
     }
 }
 

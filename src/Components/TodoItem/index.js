@@ -8,6 +8,7 @@ function TodoItem(props) {
         axios
             .delete("http://localhost:3000/todos/" + props.id)
             .then((res) => console.log(res));
+        callBackWhenTodoWasDeleted();
     }
 
     function callBackWhenCheckedIsFalse() {
@@ -16,6 +17,18 @@ function TodoItem(props) {
 
     function callBackWhenCheckedIsTrue() {
         props.callBackWhenCheckedIsTrue(props.id);
+    }
+
+    function callBackWhenTodoWasEdited() {
+        props.callBackWhenTodoWasEdited();
+    }
+
+    function callBackWhenTodoWasDeleted() {
+        props.callBackWhenTodoWasDeleted();
+    }
+
+    function idOfTodoCallBack() {
+        props.idOfTodoCallBack(props.id);
     }
 
     return (
@@ -44,13 +57,15 @@ function TodoItem(props) {
                 </div>
             </div>
 
-            <div className="col-5">{props.name}</div>
+            <div className="col-5" onClick={()=>idOfTodoCallBack()}>{props.name}</div>
             <div className="col">
-                <EditTodo id={props.id}></EditTodo>
+                <EditTodo
+                    id={props.id}
+                    callBackWhenTodoWasEdited={callBackWhenTodoWasEdited}
+                ></EditTodo>
                 <BsFillTrashFill
                     onClick={() => {
                         deleteTodo();
-                        window.location.reload();
                     }}
                 ></BsFillTrashFill>
             </div>

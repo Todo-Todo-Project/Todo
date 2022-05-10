@@ -16,6 +16,7 @@ function EditTodo(props) {
         axios
             .put("http://localhost:3000/todos/" + props.id, newTodo)
             .then((res) => console.log(res));
+        props.callBackWhenTodoWasEdited();
     }
 
     return (
@@ -50,8 +51,8 @@ function EditTodo(props) {
                         <ToggleButton
                             value={newTodo.isCompleted}
                             onToggle={(value) => {
-                                let todoTemp = {...newTodo}
-                                todoTemp.isCompleted = !value
+                                let todoTemp = { ...newTodo };
+                                todoTemp.isCompleted = !value;
                                 setNewTodo(todoTemp);
                             }}
                         />
@@ -156,7 +157,7 @@ function EditTodo(props) {
                             // onClick={() => {savingTodos()}}
                             onClick={() => {
                                 updateTodo();
-                                window.location.reload();
+                                close();
                             }}
                         >
                             SUBMIT

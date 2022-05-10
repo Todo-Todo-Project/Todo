@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 
 function App() {
     let user = JSON.parse(localStorage.authInfo).user;
-    const [listId, setListId] = useState(user._id);
-
+    const [listId, setListId] = useState("");
+    const [todoId, setTodoId] = useState("");
     return (
         <div className="document">
             <div className="navb">
@@ -23,7 +23,7 @@ function App() {
                     <ListTodoList idOfListCallBack={idOfListCallBack}/>
                 </div>
                 <div className="col">
-                    <TodoList listId={listId}/>
+                    <TodoList listId={listId} idOfTodoCallBack={idOfTodoCallBack}/>
                 </div>
                 <div className="col">
                     <TodoList />
@@ -34,6 +34,11 @@ function App() {
 
     function idOfListCallBack(listId) {
         setListId(listId);
+    }
+
+    function idOfTodoCallBack(todoId) {
+        setTodoId(todoId)
+        console.log(todoId)
     }
 }
 
