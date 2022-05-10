@@ -20,13 +20,13 @@ function App() {
                 </Navbar>
             </div>
             <div className="body-content row">
-                <div className="col">
+                <div className="col list_of_list_todo">
                     <ListTodoList idOfListCallBack={idOfListCallBack}/>
                 </div>
-                <div className="col">
+                <div className="col list_of_todo">
                     <TodoList listId={listId} idOfTodoCallBack={idOfTodoCallBack}/>
                 </div>
-                <div className="col">
+                <div className="col todo_detail">
                     <TodoDetail id={todoId}/>
                 </div>
             </div>

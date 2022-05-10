@@ -42,5 +42,26 @@
   font-size: larger;
   width: 80%;
   left: 10%;
-  top: 100px;
+  top: 70px;
+}
+
+.list_of_list_todo {
+  position: relative;
+  height: 100vh;
+  padding-top: 50px;
+  background-color: rgba(255, 0, 234, 0.15);
+}
+
+.list_of_todo {
+  position: relative;
+  height: 100vh;
+  padding-top: 50px;
+  background-color: rgba(255, 0, 234, 0.1);
+}
+
+.todo_detail {
+  position: relative;
+  height: 100vh;
+  padding-top: 50px;
+  background-color: rgba(255, 0, 234, 0.05);
 }
