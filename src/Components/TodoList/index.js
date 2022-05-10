@@ -14,7 +14,6 @@ function TodoList(props) {
     const [todos, setTodos] = useState([]);
     const [listDelete, setListDelete] = useState([]);
     const [reload, setReload] = useState(false);
-    const [sortMethod, setSortMethod] = useState("Sort")
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -90,7 +89,7 @@ function TodoList(props) {
                 .delete("http://localhost:3000/todos/" + listDelete[i])
                 .then((res) => console.log(res));
         }
-        setReload(!reload)
+        window.location.reload();
     }
     // sortDeByName(todos);
     if (error) {
@@ -114,12 +113,11 @@ function TodoList(props) {
                         <DropdownButton
                             className="drop-down-button"
                             id="dropdown-basic-button"
-                            title={sortMethod}
+                            title="Sort"
                         >
                             <Dropdown.Item
                                 onClick={() => {
                                     setTodos(sortByPriority(todos, false));
-                                    setSortMethod("Decrease priority")
                                 }}
                             >
                                 Decrease priority
@@ -127,7 +125,6 @@ function TodoList(props) {
                             <Dropdown.Item
                                 onClick={() => {
                                     setTodos(sortByPriority(todos, true));
-                                    setSortMethod("Increase priority")
                                 }}
                             >
                                 Increase priority
@@ -135,7 +132,6 @@ function TodoList(props) {
                             <Dropdown.Item
                                 onClick={() => {
                                     setTodos(sortDeByCreationDate(todos));
-                                    setSortMethod("Decrease creation date")
                                 }}
                             >
                                 Decrease creation date
@@ -143,7 +139,6 @@ function TodoList(props) {
                             <Dropdown.Item
                                 onClick={() => {
                                     setTodos(sortInByCreationDate(todos));
-                                    setSortMethod("Increase creation date")
                                 }}
                             >
                                 Increase creation date
@@ -151,7 +146,6 @@ function TodoList(props) {
                             <Dropdown.Item
                                 onClick={() => {
                                     setTodos(sortDeByDueDate(todos));
-                                    setSortMethod("Decrease due date")
                                 }}
                             >
                                 Decrease due date
@@ -159,7 +153,6 @@ function TodoList(props) {
                             <Dropdown.Item
                                 onClick={() => {
                                     setTodos(sortInByDueDate(todos));
-                                    setSortMethod("Increase due date")
                                 }}
                             >
                                 Increase due date
@@ -167,7 +160,6 @@ function TodoList(props) {
                             <Dropdown.Item
                                 onClick={() => {
                                     setTodos(sortDeByName(todos));
-                                    setSortMethod("Decrease name")
                                 }}
                             >
                                 Decrease name
@@ -175,7 +167,6 @@ function TodoList(props) {
                             <Dropdown.Item
                                 onClick={() => {
                                     setTodos(sortInByName(todos));
-                                    setSortMethod("Increase name")
                                 }}
                             >
                                 Increase name
