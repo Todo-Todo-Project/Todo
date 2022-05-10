@@ -3,6 +3,7 @@ import { Navbar } from "react-bootstrap";
 
 import TodoList from "../TodoList";
 import ListTodoList from "../ListTodoList/ListTodoList";
+import TodoDetail from "../TodoDetail/TodoDetail";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
                     <TodoList listId={listId} idOfTodoCallBack={idOfTodoCallBack}/>
                 </div>
                 <div className="col">
-                    <TodoList />
+                    <TodoDetail id={todoId}/>
                 </div>
             </div>
         </div>
