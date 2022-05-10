@@ -1,7 +1,7 @@
 import EditList from "../EditList/editList";
 import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
-
+import './ListItem.css'
 function ListItem(props) {
     function deleteList() {
         axios
@@ -15,7 +15,7 @@ function ListItem(props) {
 
     return (
         <div
-            className="row"
+            className="list_item row"
             onClick={() => {
                 itemOfListCallback();
             }}

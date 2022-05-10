@@ -69,7 +69,7 @@ function ListTodoList(props) {
     } else {
         return (
             <div>
-                <div className="list_todolist_addList row">
+                <div className="list_todolist_add_list row">
                     <h4 className="col-7">Add new list</h4>
                     <div className="col">
                         {" "}
