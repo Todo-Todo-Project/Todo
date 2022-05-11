@@ -41,7 +41,8 @@ code {
 }
 
 .todo-title{
-	font-size: 35px;
+	font-size: 25px;
+	margin-left: 10px;
 	font-weight: bolder;
 	background: linear-gradient(90deg, #5D54A4, #7C78B8);
 	-webkit-background-clip: text;

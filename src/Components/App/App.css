@@ -37,7 +37,15 @@
   }
 }
 
-.body-content {
+.main {
   position: relative;
   top: 100px;
+}
+
+.left {
+  background-color: aliceblue;
+  position: relative;
+  /* margin-top: -50px; */
+  width: 15%;
+  height: 5%;
 }

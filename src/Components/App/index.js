@@ -1,13 +1,10 @@
 import "./App.css";
 import { Col, Container, Navbar, Row, ThemeProvider } from "react-bootstrap";
-
+import Sidebar from '../Sidebar/Sidebar';
 import TodoList from "../TodoList";
 
 function App() {
-    const todos = [
-        { id: 1, name: "Learn English", isCompleted: true },
-        { id: 2, name: "Learn Spanish", isCompleted: false },
-    ];
+    const todos={};
     return (
         // <ThemeProvider
         //   breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
@@ -27,7 +24,8 @@ function App() {
         //     </Col>
         //   </Container>
         // </ThemeProvider>
-        <div className="document">
+        <>
+        <div className="header">
             <div className="navb">
                 <Navbar className="navbar">
                     <Navbar.Brand href="#home">
@@ -35,15 +33,16 @@ function App() {
                     </Navbar.Brand>
                 </Navbar>
             </div>
-            <div className="body-content row">
-                <div className="col">
-                    <TodoList todos={todos} />
+            <div className="main">
+                <div className="left col">
                 </div>
-                <div className="col">
+                <div className="right col">
                     <TodoList todos={todos} />
                 </div>
             </div>
         </div>
+        <Sidebar></Sidebar>
+        </>
     );
 }
 
