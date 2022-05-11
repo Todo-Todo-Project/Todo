@@ -33,7 +33,7 @@ function TodoItem(props) {
     }
 
     return (
-        <div className={`row todo_item todo_item_priority_${props.priority}`}>
+        <div className={`row todo_item todo_item_priority_${props.priority}`} draggable>
             <div className="col-3 row todo_item_checkbox_group">
                 <input
                     className="todo_item_checkbox"

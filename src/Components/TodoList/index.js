@@ -89,7 +89,7 @@ function TodoList(props) {
                 .delete("http://localhost:3000/todos/" + listDelete[i])
                 .then((res) => console.log(res));
         }
-        window.location.reload();
+        setReload(!reload)
     }
     // sortDeByName(todos);
     if (error) {

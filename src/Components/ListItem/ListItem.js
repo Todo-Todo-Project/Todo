@@ -1,8 +1,10 @@
 import EditList from "../EditList/editList";
 import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
-import './ListItem.css'
-function ListItem(props) {
+import './ListItem.css';
+import React from "react";
+
+const ListItem =  React.forwardRef((props, ref) => {  
     function deleteList() {
         axios
             .delete("http://localhost:3000/lists/", { data: { _id: props.id } })
@@ -14,7 +16,8 @@ function ListItem(props) {
     }
 
     return (
-        <div
+        <div 
+            ref={ref} 
             className="list_item row"
             onClick={() => {
                 itemOfListCallback();
@@ -36,6 +39,6 @@ function ListItem(props) {
     function editListCallBack() {
         props.listItemEditCallBack();
     }
-}
+})
 
 export default ListItem;

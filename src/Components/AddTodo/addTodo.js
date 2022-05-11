@@ -263,7 +263,12 @@ function AddTodo(props) {
                         <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={() => {savingTodos()}}
+                            onClick={() => {
+                                savingTodos()
+                                setNewTodoList([])
+                                setNewTodo(new Todo())
+                                close()
+                            }}
                         >
                             SUBMIT
                         </button>
