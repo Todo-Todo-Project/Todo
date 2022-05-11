@@ -231,6 +231,7 @@ function AddTodo(props) {
         console.log(localStorage.authInfo);
         for(let i =0; i < newTodoList.length; i++) {
             newTodoList[i].ownerId = user._id
+            newTodoList[i].listId  =  props.listId
             axios.post('http://localhost:3000/todos',newTodoList[i]).then((res)=> console.log(res))
         }
         props.callBackWhenTodoWasAdded()
@@ -286,6 +287,7 @@ export default AddTodo;
 
 class Todo {
     ownerId = "";
+    listId = "";
     name = "my todo";
     priority = "Normal";
     description = "";

@@ -102,7 +102,8 @@ function TodoList(props) {
                 <div className="todolist_addTodo row">
                     <h4 className="col-7">Add new Todo</h4>
                     <div className="col">
-                        <AddTodo
+                        <AddTodo 
+                            listId = {props.listId}
                             callBackWhenTodoWasAdded={callBackWhenTodoWasAdded}
                         ></AddTodo>
                         <BsFillTrashFill
