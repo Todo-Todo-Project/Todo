@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import "./addTodo.css"
 
-function AddTodo() {
+function AddTodo(props) {
     const [newTodoList, setNewTodoList] = useState([]);
     const [newTodo, setNewTodo] = useState(new Todo());
     let newTodoListElement = [];
@@ -228,10 +228,12 @@ function AddTodo() {
 
     function savingTodos () {
         let user = JSON.parse(localStorage.authInfo).user
+        console.log(localStorage.authInfo);
         for(let i =0; i < newTodoList.length; i++) {
-            newTodoList[i].email = user.email
+            newTodoList[i].ownerId = user._id
             axios.post('http://localhost:3000/todos',newTodoList[i]).then((res)=> console.log(res))
         }
+        props.callBackWhenTodoWasAdded()
     }
 
     return (
@@ -283,7 +285,7 @@ function AddTodo() {
 export default AddTodo;
 
 class Todo {
-    email = ""
+    ownerId = "";
     name = "my todo";
     priority = "Normal";
     description = "";

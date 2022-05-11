@@ -1,4 +1,4 @@
-import { Col, Container, Navbar, Row, ThemeProvider } from 'react-bootstrap';
+import { Col, Container, Row, ThemeProvider } from 'react-bootstrap';
 import { login } from './actions';
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,8 @@ import axios from 'axios';
 
 
 function Login() {
+  const [error, setError] = useState(null);
+  
   const navigate = useNavigate();
 
   const handleFailure = (result) => {
@@ -18,7 +20,7 @@ function Login() {
     console.log(response)
     axios({
       method: "POST",
-      url: "http://localhost:3000/googlelogin",
+      url: "http://localhost:3000/users/googlelogin",
       data: {tokenId: response.tokenId}
     }).then(response => {
       console.log(response)
@@ -50,8 +52,12 @@ function Login() {
                     }}
                     onSubmit={async (values, { setSubmitting }) => {
                       const authInfo = await login(values.email, values.password);
-                      localStorage.setItem('authInfo', JSON.stringify(authInfo));
-                      navigate('/home');
+                      if (authInfo.user) {
+                        localStorage.setItem('authInfo', JSON.stringify(authInfo));
+                        navigate('/home');
+                      } else {
+                        setError(authInfo.errors);
+                      }
                     }}
                   >
                     {({

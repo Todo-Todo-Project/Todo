@@ -2,28 +2,15 @@ import "./App.css";
 import { Col, Container, Navbar, Row, ThemeProvider } from "react-bootstrap";
 import Sidebar from '../Sidebar/Sidebar';
 import TodoList from "../TodoList";
+import ListTodoList from "../ListTodoList/ListTodoList";
+import TodoDetail from "../TodoDetail/TodoDetail";
+import { useEffect, useState } from "react";
 
 function App() {
-    const todos={};
+    let user = JSON.parse(localStorage.authInfo).user;
+    const [listId, setListId] = useState("");
+    const [todoId, setTodoId] = useState("");
     return (
-        // <ThemeProvider
-        //   breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
-        // >
-        //   <Navbar className="navbar">
-        //     <Container>
-        //       <Navbar.Brand href="#home">
-        //         <div className="todo-title">Todo Todo</div></Navbar.Brand>
-        //     </Container>
-        //   </Navbar>
-        //   <Container>
-        //     <Col md={1}>
-        //       <Row md={1}>Left menu</Row>
-        //     </Col>
-        //     <Col md={2}>
-        //       <Row md={12}><TodoList todos={todos} /></Row>
-        //     </Col>
-        //   </Container>
-        // </ThemeProvider>
         <>
         <div className="header">
             <div className="navb">
@@ -33,17 +20,30 @@ function App() {
                     </Navbar.Brand>
                 </Navbar>
             </div>
-            <div className="main">
-                <div className="left col">
+            <div className="body-content row">
+                <div className="col list_of_list_todo">
+                    <ListTodoList idOfListCallBack={idOfListCallBack}/>
                 </div>
-                <div className="right col">
-                    <TodoList todos={todos} />
+                <div className="col list_of_todo">
+                    <TodoList listId={listId} idOfTodoCallBack={idOfTodoCallBack}/>
+                </div>
+                <div className="col todo_detail">
+                    <TodoDetail id={todoId}/>
                 </div>
             </div>
         </div>
         <Sidebar></Sidebar>
         </>
     );
+
+    function idOfListCallBack(listId) {
+        setListId(listId);
+    }
+
+    function idOfTodoCallBack(todoId) {
+        setTodoId(todoId)
+        console.log(todoId)
+    }
 }
 
 export default App;
