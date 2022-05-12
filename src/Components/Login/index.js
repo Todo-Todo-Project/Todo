@@ -16,12 +16,6 @@ function Login() {
     alert(result);
   }
 
-  const [loginData, setLoginData] = useState(
-    localStorage.getItem('loginData')
-      ? JSON.parse(localStorage.getItem('loginData'))
-      : null
-  );
-
   const handleLogin = (response) => {
     console.log(response)
     axios({
@@ -60,6 +54,7 @@ function Login() {
                     onSubmit={async (values, { setSubmitting }) => {
                       const authInfo = await login(values.email, values.password);
                       if (authInfo.user) {
+                        console.log(authInfo);
                         localStorage.setItem('authInfo', JSON.stringify(authInfo));
                         navigate('/home');
                       } else {
