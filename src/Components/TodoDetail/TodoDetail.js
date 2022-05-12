@@ -26,26 +26,26 @@ function TodoDetail(props) {
         console.log(todo)
         return (
             <div>
-                <h3>{todo.name}</h3>
+                <h3 className="font-bold text-3xl">{todo.name}</h3>
                 <div className="col">
                     <div className="row">
-                        <div className="col-4">Priority:</div>
+                        <div className="col-4 font-bold">Priority:</div>
                         <div className="col-5">{todo.priority}</div>
                     </div>
                     <div className="row">
-                        <div className="col-4">Description:</div>
+                        <div className="col-4 font-bold">Description:</div>
                         <div className="col-5">{todo.description}</div>
                     </div>
                     <div className="row">
-                        <div className="col-4">Creation date:</div>
+                        <div className="col-4 font-bold">Creation date:</div>
                         <div className="col-5">{ConvertDateToDisplayDate(todo.creationdate)}</div>
                     </div>
                     <div className="row">
-                        <div className="col-4">Due date:</div>
+                        <div className="col-4 font-bold">Due date:</div>
                         <div className="col-5">{ConvertDateToDisplayDate(todo.duedate)}</div>
                     </div>
                     <div className="row">
-                        <div className="col-4">Status:</div>
+                        <div className="col-4 font-bold">Status:</div>
                         <div className="col-5">{StatusPipe(todo.isCompleted)}</div>
                     </div>
                 </div>

@@ -41,7 +41,9 @@ function AddList(props) {
                         <div>
                             <input
                                 type="text"
+                                className="border-2 border-bray-500"
                                 value={newList.listName}
+                                placeholder={newList.listName}
                                 onChange={(input) => {
                                     let tempList = { ...newList };
                                     tempList.listName = input.target.value;
@@ -53,7 +55,7 @@ function AddList(props) {
                     <div className="add_new_list_todo_popup_footer modal-footer">
                         <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn btn-primary bg-blue-500"
                             onClick={() => {
                                 savingList();
                                 close();

@@ -3,9 +3,8 @@ import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
 import { useEffect } from "react";
 import "./TodoItem.css";
-import React from "react";
 
-const TodoItem = React.forwardRef((props, ref) => {
+function TodoItem(props) {
     function deleteTodo() {
         axios
             .delete("http://localhost:3000/todos/" + props.id)
@@ -34,7 +33,7 @@ const TodoItem = React.forwardRef((props, ref) => {
     }
 
     return (
-        <div className={`row todo_item todo_item_priority_${props.priority}`} ref-={ref}>
+        <div className={`row todo_item todo_item_priority_${props.priority}`}>
             <div className="col-3 row todo_item_checkbox_group">
                 <input
                     className="todo_item_checkbox"
@@ -74,6 +73,6 @@ const TodoItem = React.forwardRef((props, ref) => {
             </div>
         </div>
     );
-})
+}
 
 export default TodoItem;

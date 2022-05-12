@@ -63,7 +63,9 @@ function EditTodo(props) {
                                 <h5>Name</h5>
                                 <input
                                     type="text"
+                                    value={newTodo.name}
                                     placeholder={newTodo.name}
+                                    className="border-2 border-bray-500"
                                     onChange={(input) => {
                                         let tempTodo = { ...newTodo };
                                         tempTodo.name = input.target.value;
@@ -75,6 +77,7 @@ function EditTodo(props) {
                                 <h5>Expired Date</h5>
                                 <input
                                     type="date"
+                                    className="border-2 border-bray-500"
                                     value={ConvertDateToDisplayDate(
                                         newTodo.duedate
                                     )}
@@ -89,7 +92,7 @@ function EditTodo(props) {
                             <div className="add_new_todo_priority drop-down">
                                 <h5>Priority</h5>
                                 <DropdownButton
-                                    className="drop-down-button"
+                                    className="drop-down-button bg-blue-500 w-max"
                                     id="dropdown-basic-button"
                                     title={newTodo.priority}
                                 >
@@ -137,6 +140,7 @@ function EditTodo(props) {
                                 <input
                                     type="text"
                                     value={newTodo.description}
+                                    className="border-2 border-bray-500"
                                     onChange={(input) => {
                                         let tempTodo = { ...newTodo };
                                         tempTodo.description =
@@ -153,7 +157,7 @@ function EditTodo(props) {
                     <div className="add_new_todo_popup_footer modal-footer">
                         <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn btn-primary bg-blue-500"
                             // onClick={() => {savingTodos()}}
                             onClick={() => {
                                 updateTodo();

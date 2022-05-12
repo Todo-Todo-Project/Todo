@@ -20,6 +20,7 @@ function AddTodo(props) {
                         key={"name"+i}
                         type="text"
                         value={newTodoList[i].name}
+                        className="border-2 border-gray-500"
                         onChange={(input) => {
                             if (input.target.value === "") {
                                 alert("Todo name can not be empty")
@@ -35,6 +36,7 @@ function AddTodo(props) {
                     <h5>Expired Date</h5>
                     <input
                         type="date"
+                        className="border-2 border-gray-500"
                         value={newTodoList[i].dueDate}
                         onChange={(input) => {
                             let tempTodo = [...newTodoList];
@@ -47,7 +49,7 @@ function AddTodo(props) {
                 <div key={"priority"+i} className="add_new_todo_priority drop-down">
                     <h5>Priority</h5>
                     <DropdownButton
-                        className="drop-down-button"
+                        className="drop-down-button bg-blue-500 w-max"
                         id="dropdown-basic-button"
                         title={newTodoList[i].priority}
                     >
@@ -95,6 +97,7 @@ function AddTodo(props) {
                     <input
                         key={"description"+i}
                         type="text"
+                        className="border-2 border-gray-500"
                         value={newTodoList[i].description}
                         onChange={(input) => {
                             if (input.target.value === "") {
@@ -121,6 +124,7 @@ function AddTodo(props) {
                 <input
                     type="text"
                     placeholder={newTodo.name}
+                    className="border-2 border-gray-500"
                     onChange={(input) => {
                         let tempTodo = { ...newTodo };
                         tempTodo.name = input.target.value;
@@ -132,6 +136,7 @@ function AddTodo(props) {
                 <h5>Expired Date</h5>
                 <input
                     type="date"
+                    className="border-2 border-gray-500"
                     value={ConvertDateToDisplayDate(newTodo.duedate)}
                     onChange={(input) => {
                         let tempTodo = { ...newTodo };
@@ -144,7 +149,7 @@ function AddTodo(props) {
             <div className="add_new_todo_priority drop-down">
                 <h5>Priority</h5>
                 <DropdownButton
-                    className="drop-down-button"
+                    className="drop-down-button bg-blue-500 w-max"
                     id="dropdown-basic-button"
                     title={newTodo.priority}
                 >
@@ -191,6 +196,7 @@ function AddTodo(props) {
                 <h5>Description</h5>
                 <input
                     type="text"
+                    className="border-2 border-gray-500"
                     value={newTodo.description}
                     onChange={(input) => {
                         let tempTodo = { ...newTodo };
@@ -201,7 +207,7 @@ function AddTodo(props) {
             </div>
             <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-primary bg-blue-500"
                 onClick={() => {
                     if (newTodo.name === "") {
                         alert("Todo name can not be empty")
@@ -254,7 +260,7 @@ function AddTodo(props) {
             {(close) => (
                 <div className="add_new_todo_popup">
                     <div className="add_new_todo_popup_title modal-header">
-                        <h2>Add new todo</h2>
+                        <h2 className="font-bold">Add new todo</h2>
                     </div>
                     <div className="add_new_todo_popup_body modal-body">
                         {newTodoListElement}
@@ -262,13 +268,8 @@ function AddTodo(props) {
                     <div className="add_new_todo_popup_footer modal-footer">
                         <button
                             type="button"
-                            className="btn btn-primary"
-                            onClick={() => {
-                                savingTodos()
-                                setNewTodoList([])
-                                setNewTodo(new Todo())
-                                close()
-                            }}
+                            className="btn btn-primary bg-blue-500"
+                            onClick={() => {savingTodos()}}
                         >
                             SUBMIT
                         </button>

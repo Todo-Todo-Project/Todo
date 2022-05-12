@@ -8,7 +8,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import axios from "axios";
 
 import "./ListTodoList.css";
@@ -21,7 +20,7 @@ function ListTodoList(props) {
     const [listId, setListId] = useState("");
     const [rerender, setRerender] = useState(false);
     const navigate = useNavigate();
-    const [dragandrop, setDragandrop] = useState(false);
+
     useEffect(() => {
         console.log("listtodolist");
         loadAllTodos();
@@ -63,15 +62,6 @@ function ListTodoList(props) {
         console.log(lists);
     }
 
-    function handleOnDragEnd(result){
-        if(!result.destination) return;
-        
-        const item = Array.from(lists);
-        const [reorderedItem] = item.splice(result.source.index, 1);
-        item.splice(result.destination.index, 0, reorderedItem);
-        setLists(item);
-    }
-
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -80,56 +70,36 @@ function ListTodoList(props) {
         return (
             <div>
                 <div className="list_todolist_add_list row">
-                    <h4 className="col-7">Add new list</h4>
+                    <h4 className="col-7 font-bold">Add new list</h4>
                     <div className="col">
                         {" "}
                         <AddList
                             addNewListCallBack={addNewListCallBack}
                         ></AddList>
-                        <input type="checkbox" onChange={() => setDragandrop(!dragandrop)} value={dragandrop}></input>
                     </div>
                 </div>
-                <DragDropContext onDragEnd={handleOnDragEnd}>
-                    <Droppable droppableId="move_listName">
-                        {(provided) => (
-                             <div className="list-list" {...provided.droppableProps} ref={provided.innerRef}>
-                            {
-                                 lists?.map((list, index) => (
-                                     
-                                     <Draggable key={list._id} index={index} draggableId={list._id} isDragDisabled={dragandrop}>
-                                         {(provided) => (
-                                             <div
-                                             ref={provided.innerRef}
-                                             {...provided.draggableProps}
-                                             {...provided.dragHandleProps}         
-                                            >
-                                                <ListItem 
-                                                itemOfListCallBack={itemOfListCallBack}
-                                                listItemDeleteCallBack={listItemDeleteCallBack}
-                                                listItemEditCallBack={listItemEditCallBack}
-                                                name={list.listName}
-                                                id={list._id}
-                                                />
-                                            </div>
-                                        
-                                         )}
-                                     </Draggable>
-                                 ))
-                            }
-                             {provided.placeholder}
-                         </div>
-                        )}
-                   
-                    </Droppable>
-                </DragDropContext>
-                
+                <ul className="list-list">
+                    {lists.length === undefined ? (
+                        <h1>Have no list here</h1>
+                    ) : (
+                        lists.map((list) => (
+                            <ListItem
+                                itemOfListCallBack={itemOfListCallBack}
+                                listItemDeleteCallBack={listItemDeleteCallBack}
+                                listItemEditCallBack={listItemEditCallBack}
+                                key={list._id}
+                                name={list.listName}
+                                id={list._id}
+                            />
+                        ))
+                    )}
+                </ul>
             </div>
         );
     }
 
     function itemOfListCallBack(listId) {
         setListId(listId);
-        console.log(listId);
         props.idOfListCallBack(listId);
     }
 
