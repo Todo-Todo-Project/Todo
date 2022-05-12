@@ -72,15 +72,7 @@ function ListTodoList(props) {
         return (
             <>
             <div>
-                <div className="list_todolist_add_list row">
-                    <h4 className="col-9 font-bold"></h4>
-                    <div className="col">
-                        {" "}
-                        <AddList
-                            addNewListCallBack={addNewListCallBack}
-                        ></AddList>
-                    </div>
-                </div>
+             
                 <ul className="list-list">
                      {SidebarData.map((item, index) => {
                             return (
@@ -111,6 +103,16 @@ function ListTodoList(props) {
                         ))
                     )}
                 </ul>
+                <div className="list_todolist_add_list row">
+                    
+                    <h4 className="col-9">Add new list</h4>
+                    <div className="col">
+                        {" "}
+                        <AddList
+                            addNewListCallBack={addNewListCallBack}
+                        ></AddList>
+                    </div>
+                </div>
             </div>
             </>
         );
