@@ -1,7 +1,7 @@
 .sub-navbar {
     background-color: #060b26;
     height: 30px;
-    margin-top: -75px;
+    /* margin-top: -75px; */
     display: flex;
     justify-content: start;
     align-items: center;

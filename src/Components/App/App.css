@@ -57,20 +57,20 @@
 .list_of_list_todo {
   position: relative;
   height: 100vh;
-  padding-top: 50px;
-  background-color: rgba(255, 0, 234, 0.15);
+  padding-top: 20px;
+  background-color: #776BCC;
 }
 
 .list_of_todo {
   position: relative;
   height: 100vh;
-  padding-top: 50px;
-  background-color: rgba(255, 0, 234, 0.1);
+  padding-top: 20px;
+  background-color: #fff;
 }
 
 .todo_detail {
   position: relative;
   height: 100vh;
-  padding-top: 50px;
-  background-color: rgba(255, 0, 234, 0.05);
+  padding-top: 20px;
+  background-color: #776BCC;
 }

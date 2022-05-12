@@ -1,5 +1,5 @@
 import EditList from "../EditList/editList";
-import { BsFillTrashFill } from "react-icons/bs";
+import { BsFillTrashFill, BsListStars } from "react-icons/bs";
 import axios from "axios";
 import './ListItem.css'
 function ListItem(props) {
@@ -19,16 +19,28 @@ function ListItem(props) {
             onClick={() => {
                 itemOfListCallback();
             }}
-        >
-            <div className="col-7 font-semibold">{props.name}</div>
-            <div className="col">
-                <EditList id={props.id} editListCallBack={editListCallBack}></EditList>
-                <BsFillTrashFill
-                    onClick={() => {
-                        deleteList();
-                        props.listItemDeleteCallBack()
-                    }}
-                ></BsFillTrashFill>
+        >        
+            <div className="sub-nav-text">
+                {(props.icon === undefined ? (
+                    <>
+                        <BsListStars></BsListStars>                    
+                        <span>{props.name}</span>
+                        <EditList id={props.id} editListCallBack={editListCallBack}></EditList>
+                        <BsFillTrashFill
+                            onClick={() => {
+                            deleteList();
+                            props.listItemDeleteCallBack()
+                            }}
+                        ></BsFillTrashFill>
+                    </>
+                ):(
+                    <>
+                        {props.icon} 
+                        <span>{props.name}</span>
+
+                    </>
+                ))}
+               
             </div>
         </div>
     );

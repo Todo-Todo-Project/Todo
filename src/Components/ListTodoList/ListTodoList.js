@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 import axios from "axios";
+import { SidebarData } from '../Sidebar/SidebarData';
 
 import "./ListTodoList.css";
 import { propTypes } from "react-bootstrap/esm/Image";
+import Sidebar from "../Sidebar/Sidebar";
 
 function ListTodoList(props) {
     const [error, setError] = useState(null);
@@ -68,9 +70,10 @@ function ListTodoList(props) {
         return <div>Loading...</div>;
     } else {
         return (
+            <>
             <div>
                 <div className="list_todolist_add_list row">
-                    <h4 className="col-7 font-bold">Add new list</h4>
+                    <h4 className="col-9 font-bold"></h4>
                     <div className="col">
                         {" "}
                         <AddList
@@ -79,8 +82,22 @@ function ListTodoList(props) {
                     </div>
                 </div>
                 <ul className="list-list">
+                     {SidebarData.map((item, index) => {
+                            return (
+                                <ListItem 
+                                itemOfListCallBack={itemOfListCallBack}
+                                listItemDeleteCallBack={listItemDeleteCallBack}
+                                listItemEditCallBack={listItemEditCallBack}
+                                key={item._id}
+                                name={item.title}
+                                id={item._id}
+                                icon={item.icon}
+                                ></ListItem>
+                            );
+                        })}
+
                     {lists.length === undefined ? (
-                        <h1>Have no list here</h1>
+                        <></>
                     ) : (
                         lists.map((list) => (
                             <ListItem
@@ -95,6 +112,7 @@ function ListTodoList(props) {
                     )}
                 </ul>
             </div>
+            </>
         );
     }
 

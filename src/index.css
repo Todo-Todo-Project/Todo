@@ -227,4 +227,7 @@ p {
 .social-login__icon:hover {
 	transform: scale(1.5);	
 }
- 
+a {
+	color: #776BCC;
+	text-decoration: underline;
+}

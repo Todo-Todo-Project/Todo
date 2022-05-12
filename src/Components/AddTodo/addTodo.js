@@ -11,112 +11,6 @@ function AddTodo(props) {
     const [newTodoList, setNewTodoList] = useState([]);
     const [newTodo, setNewTodo] = useState(new Todo());
     let newTodoListElement = [];
-    for (let i = 0; i < newTodoList.length; i++) {
-        newTodoListElement.push(
-            <div>
-                <div className="add_new_todo_name">
-                    <h5>Name</h5>
-                    <input
-                        key={"name"+i}
-                        type="text"
-                        value={newTodoList[i].name}
-                        className="border-2 border-gray-500"
-                        onChange={(input) => {
-                            if (input.target.value === "") {
-                                alert("Todo name can not be empty")
-                                return;
-                            }
-                            let tempTodo = [...newTodoList];
-                            tempTodo[i].name = input.target.value;
-                            setNewTodoList(tempTodo);
-                        }}
-                    ></input>
-                </div>
-                <div key={"dueDate"+i} className="add_new_todo_date">
-                    <h5>Expired Date</h5>
-                    <input
-                        type="date"
-                        className="border-2 border-gray-500"
-                        value={newTodoList[i].dueDate}
-                        onChange={(input) => {
-                            let tempTodo = [...newTodoList];
-                            tempTodo[i].dueDate = input.target.value;
-                            setNewTodoList(tempTodo);
-                        }}
-                    ></input>
-                </div>
-
-                <div key={"priority"+i} className="add_new_todo_priority drop-down">
-                    <h5>Priority</h5>
-                    <DropdownButton
-                        className="drop-down-button bg-blue-500 w-max"
-                        id="dropdown-basic-button"
-                        title={newTodoList[i].priority}
-                    >
-                        <Dropdown.Item
-                            onClick={() => {
-                                let tempTodo = [...newTodoList];
-                                tempTodo[i].priority = "Low";
-                                setNewTodoList(tempTodo);
-                            }}
-                        >
-                            Low
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                            onClick={() => {
-                                let tempTodo = [...newTodoList];
-                                tempTodo[i].priority = "Medium";
-                                setNewTodoList(tempTodo);
-                            }}
-                        >
-                            Medium
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                            onClick={() => {
-                                let tempTodo = [...newTodoList];
-                                tempTodo[i].priority = "High";
-                                setNewTodoList(tempTodo);
-                            }}
-                        >
-                            High
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                            onClick={() => {
-                                let tempTodo = [...newTodoList];
-                                tempTodo[i].priority = "Urgent";
-                                setNewTodoList(tempTodo);
-                            }}
-                        >
-                            Urgent
-                        </Dropdown.Item>
-                    </DropdownButton>
-                </div>
-
-                <div key={i} className="add_new_todo_description">
-                    <h5>Content</h5>
-                    <input
-                        key={"description"+i}
-                        type="text"
-                        className="border-2 border-gray-500"
-                        value={newTodoList[i].description}
-                        onChange={(input) => {
-                            if (input.target.value === "") {
-                                alert("Description can not be empty")
-                                return;
-                            }
-                            let tempTodo = [...newTodoList];
-                            tempTodo[i].description = input.target.value;
-                            setNewTodoList(tempTodo);
-                        }}
-                    ></input>
-                </div>
-
-                <br></br>
-                <br></br>
-            </div>
-        );
-    }
-
     newTodoListElement.push(
         <div>
             <div className="add_new_todo_name">
@@ -205,42 +99,19 @@ function AddTodo(props) {
                     }}
                 ></input>
             </div>
-            <button
-                type="button"
-                className="btn btn-primary bg-blue-500"
-                onClick={() => {
-                    if (newTodo.name === "") {
-                        alert("Todo name can not be empty")
-                        return
-                    }
-
-                    if (newTodo.description === "") {
-                        alert("Description can not be empty")
-                        return;
-                    }
-                    let newTodoListTemp = [...newTodoList];
-                    newTodoListTemp.push(newTodo);
-                    setNewTodoList(newTodoListTemp);
-                    setNewTodo(new Todo())
-                }}
-            >
-                ADD
-            </button>
-
-            <br></br>
-            <br></br>
         </div>
     );
 
     function savingTodos () {
         let user = JSON.parse(localStorage.authInfo).user
         console.log(localStorage.authInfo);
-        for(let i =0; i < newTodoList.length; i++) {
-            newTodoList[i].ownerId = user._id
-            newTodoList[i].listId  =  props.listId
+        let i = newTodoList.length-1;
+        {
+            newTodoList[i].ownerId = user._id;
+            newTodoList[i].listId  =  props.listId;
             axios.post('http://localhost:3000/todos',newTodoList[i]).then((res)=> console.log(res))
         }
-        props.callBackWhenTodoWasAdded()
+        props.callBackWhenTodoWasAdded();
     }
 
     return (
@@ -269,7 +140,22 @@ function AddTodo(props) {
                         <button
                             type="button"
                             className="btn btn-primary bg-blue-500"
-                            onClick={() => {savingTodos()}}
+                            onClick= {() => {
+                                if (newTodo.name === "") {
+                                    alert("Todo name can not be empty")
+                                    return
+                                }
+                                let newTodoListTemp = [...newTodoList];
+                                newTodoListTemp.push(newTodo);
+                                console.log(newTodo);
+
+                                setNewTodoList(newTodoListTemp);
+                                console.log(newTodoListTemp);
+
+                                setNewTodo(new Todo());
+                                savingTodos();
+                                close();} 
+                        }
                         >
                             SUBMIT
                         </button>
