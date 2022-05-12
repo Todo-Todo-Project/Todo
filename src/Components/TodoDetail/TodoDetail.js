@@ -18,9 +18,6 @@ function TodoDetail(props) {
         getTodo();
     }, [props.id]);
 
-    if (todo === undefined) {
-        return (<h3>Choise todo to view detai</h3>);
-    }
 
     if (todo !== undefined) {
         console.log(todo)
@@ -32,10 +29,7 @@ function TodoDetail(props) {
                         <div className="col-4 font-bold">Priority:</div>
                         <div className="col-5">{todo.priority}</div>
                     </div>
-                    <div className="row">
-                        <div className="col-4 font-bold">Description:</div>
-                        <div className="col-5">{todo.description}</div>
-                    </div>
+                  
                     <div className="row">
                         <div className="col-4 font-bold">Creation date:</div>
                         <div className="col-5">{ConvertDateToDisplayDate(todo.creationdate)}</div>
@@ -47,6 +41,10 @@ function TodoDetail(props) {
                     <div className="row">
                         <div className="col-4 font-bold">Status:</div>
                         <div className="col-5">{StatusPipe(todo.isCompleted)}</div>
+                    </div>
+                    <div className="row">
+                        <div className="col-4 font-bold">Description:</div>
+                        <div className="col-5">{todo.description}</div>
                     </div>
                 </div>
             </div>

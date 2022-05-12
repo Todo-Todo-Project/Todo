@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-function Nav () {
+function Profile () {
     const navigate = useNavigate();
     function getUser(){
         let user = JSON.parse(localStorage.authInfo).user;
@@ -19,7 +19,6 @@ function Nav () {
     return(
         <div>
             <div>{getUser()}</div>
-            Khanh dep trai
             <div>
             <Button variant="contained" color="primary" onClick={LogOut}>
                 Log Out
@@ -30,4 +29,4 @@ function Nav () {
     )
 }
 
-export default Nav;
+export default Profile;

@@ -1,3 +1,6 @@
 .list_todolist_add_list{
+    margin-top: 20px;
     color: #fff;
+    border: 1px solid;
+    padding: 5px;
 }

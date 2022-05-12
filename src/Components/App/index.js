@@ -4,21 +4,30 @@ import TodoList from "../TodoList";
 import ListTodoList from "../ListTodoList/ListTodoList";
 import TodoDetail from "../TodoDetail/TodoDetail";
 import { useEffect, useState } from "react";
-
+import Profile from "../Profile";
+import { useNavigate } from 'react-router-dom';
+import {IoMdExit} from "react-icons/io";
 function App() {
   let user = JSON.parse(localStorage.authInfo).user;
   const [listId, setListId] = useState("");
   const [todoId, setTodoId] = useState("");
+  const navigate = useNavigate();
+
+  const LogOut = () =>{
+    localStorage.setItem('authInfo', null);
+    navigate('/login');
+}
+
   return (
     <>
       <div className="header">
         <div className="navb sticky top-0 z-50">
           <Navbar className="navbar">
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="home">
               <div className="todo-title">Todo Todo</div>
             </Navbar.Brand>
-            <Navbar.Brand href="login">
-              <div>Logout</div>
+            <Navbar.Brand >
+              <div className="logout" onClick={LogOut}><IoMdExit></IoMdExit></div>
             </Navbar.Brand>
           </Navbar>
         </div>
@@ -34,7 +43,6 @@ function App() {
           </div>
         </div>
       </div>
-      {/* <Sidebar></Sidebar> */}
     </>
   );
 

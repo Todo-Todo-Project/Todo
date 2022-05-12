@@ -93,26 +93,19 @@ function Register() {
                       </form>
                   )}
                   </Formik>
-                  <div className='google_register'>
-                  <GoogleLogin
-                    clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                    buttonText = 'Register with Google'
-                    onSuccess = {handleRegister}
-                    onFailure = {handleFailure}
-                    cookiePolicy = {'single_host_origin'}
-                  ></GoogleLogin>
-                  </div>
+                 
                 </div>
                 
                 <div className='social-login'>
-                  <h5>Log in via</h5>
-                  <div className="social-icons">
-                    <i className="social-login__icon fab fa-instagram"></i>
-                    <i className="social-login__icon fab fa-facebook"></i>
-                    <i className="social-login__icon fab fa-twitter"></i>
+                    <GoogleLogin
+                      clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                      buttonText = 'Register with Google'
+                      onSuccess = {handleRegister}
+                      onFailure = {handleFailure}
+                      cookiePolicy = {'single_host_origin'}
+                    ></GoogleLogin>
                   </div>
                 </div>
-              </div>
             <div className="screen_background">
               <span className="background_shape shape4"></span>
               <span className="background_shape shape3"></span>		

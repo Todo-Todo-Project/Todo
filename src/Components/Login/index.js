@@ -103,16 +103,16 @@ function Login() {
                       </form>
                   )}
                   </Formik>
-                  <div className='google_login'>
-                  <GoogleLogin
-                    clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                    buttonText = 'Login with Google'
-                    onSuccess = {handleLogin}
-                    onFailure = {handleFailure}
-                    cookiePolicy = {'single_host_origin'}
-                  ></GoogleLogin>
                 </div>
-                </div>
+                <div className='social-login'>
+                <GoogleLogin
+                      clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                      buttonText = 'Login with Google'
+                      onSuccess = {handleLogin}
+                      onFailure = {handleFailure}
+                      cookiePolicy = {'single_host_origin'}
+                    ></GoogleLogin>
+              </div>
               </div>
             <div className="screen_background">
               <span className="background_shape shape4"></span>

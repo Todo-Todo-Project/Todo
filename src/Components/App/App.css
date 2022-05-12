@@ -58,19 +58,26 @@
   position: relative;
   height: 100vh;
   padding-top: 20px;
-  background-color: #776BCC;
+  background-color: #5D54A4;
+
 }
 
 .list_of_todo {
   position: relative;
   height: 100vh;
   padding-top: 20px;
-  background-color: #fff;
+  background-color: #8e8bb8;
+
 }
 
 .todo_detail {
   position: relative;
   height: 100vh;
   padding-top: 20px;
-  background-color: #776BCC;
+  background-color: #8e8bb8;
+
+}
+.logout{
+  margin-left: 175vh;
+  right: 10%;
 }

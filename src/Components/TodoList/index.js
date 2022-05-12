@@ -106,9 +106,9 @@ function TodoList(props) {
                             listId = {props.listId}
                             callBackWhenTodoWasAdded={callBackWhenTodoWasAdded}
                         ></AddTodo>
-                        <BsFillTrashFill
+                        {/* <BsFillTrashFill
                             onClick={() => deleteListTodo()}
-                        ></BsFillTrashFill>
+                        ></BsFillTrashFill> */}
                     </div>
                     <div className="col">
                         <DropdownButton
