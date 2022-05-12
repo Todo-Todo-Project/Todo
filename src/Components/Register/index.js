@@ -2,11 +2,28 @@ import { Col, Container, Navbar, Row, ThemeProvider } from 'react-bootstrap';
 import { register } from './actions';
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import GoogleLogin from 'react-google-login';
 import React from 'react';
+import axios from 'axios';
 
 
 function Register() {
   const navigate = useNavigate();
+
+  const handleFailure = (result) => {
+    alert(result);
+  }
+
+  const handleRegister = (response) => {
+    axios({
+      method: "POST",
+      url: "http://localhost:3000/users/googleregister",
+      data: {tokenId: response.tokenId}
+    }).then(response => {
+      console.log(response)
+    })
+  }
+
   return (
     <ThemeProvider
       breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
@@ -76,6 +93,15 @@ function Register() {
                       </form>
                   )}
                   </Formik>
+                  <div className='google_register'>
+                  <GoogleLogin
+                    clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                    buttonText = 'Register with Google'
+                    onSuccess = {handleRegister}
+                    onFailure = {handleFailure}
+                    cookiePolicy = {'single_host_origin'}
+                  ></GoogleLogin>
+                  </div>
                 </div>
                 
                 <div className='social-login'>

@@ -16,6 +16,12 @@ function Login() {
     alert(result);
   }
 
+  const [loginData, setLoginData] = useState(
+    localStorage.getItem('loginData')
+      ? JSON.parse(localStorage.getItem('loginData'))
+      : null
+  );
+
   const handleLogin = (response) => {
     console.log(response)
     axios({
@@ -23,7 +29,8 @@ function Login() {
       url: "http://localhost:3000/users/googlelogin",
       data: {tokenId: response.tokenId}
     }).then(response => {
-      console.log(response)
+      localStorage.setItem('authInfo', JSON.stringify(response.data));
+      navigate('/home');
     })
   }
 
